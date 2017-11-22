@@ -1,0 +1,183 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_light">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="32dp"
+            android:src="@drawable/ic_home_white_24dp"
+            app:backgroundTint="@color/accent"
+            app:elevation="@dimen/default_elevation"
+            app:rippleColor="@color/primary"/>
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/home"/>
+
+    </RelativeLayout>
+
+</layout>
+
+
+    <!--<FrameLayout-->
+    <!--android:visibility="gone"-->
+    <!--android:id="@+id/buttons"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<com.arlib.floatingsearchview.FloatingSearchView-->
+    <!--android:id="@+id/search"-->
+    <!--android:visibility="invisible"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:padding="16dp"-->
+    <!--app:floatingSearch_suggestionsListAnimDuration="250"-->
+    <!--app:floatingSearch_leftActionMode="showSearch"-->
+    <!--app:floatingSearch_menu="@menu/search_menu"-->
+    <!--app:floatingSearch_searchHint="Search..."-->
+    <!--app:floatingSearch_showSearchKey="true"-->
+    <!--app:floatingSearch_dismissOnOutsideTouch="true"-->
+    <!--app:floatingSearch_close_search_on_keyboard_dismiss="true" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|end"-->
+    <!--android:gravity="bottom|end"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/home"-->
+    <!--android:visibility="invisible"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
+    <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
+    <!--android:src="@drawable/ic_home_white_24dp"-->
+    <!--app:backgroundTint="@color/accent"-->
+    <!--app:elevation="@dimen/default_elevation"-->
+    <!--app:rippleColor="@color/primary" />-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/loc"-->
+    <!--android:visibility="invisible"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
+    <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
+    <!--android:src="@drawable/ic_my_location_white_24dp"-->
+    <!--app:backgroundTint="@color/accent"-->
+    <!--app:elevation="@dimen/default_elevation"-->
+    <!--app:rippleColor="@color/primary" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</FrameLayout>-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/heading"-->
+    <!--android:text="Milwaukee"-->
+    <!--android:textSize="26sp"-->
+    <!--android:paddingTop="24dp"-->
+    <!--android:paddingLeft="58dp"-->
+    <!--android:paddingBottom="16dp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:paddingLeft="58dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:id="@+id/image_slider"-->
+    <!--android:layout_below="@id/heading"-->
+    <!--android:background="@color/background"-->
+    <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="250dp"/>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/title_container"-->
+    <!--android:paddingTop="4dp"-->
+    <!--android:paddingBottom="4dp"-->
+    <!--android:layout_below="@id/image_slider"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<ImageView-->
+    <!--android:padding="4dp"-->
+    <!--android:paddingLeft="16dp"-->
+    <!--android:paddingRight="16dp"-->
+    <!--android:layout_width="26dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/ic_info_outline_black_24dp"-->
+    <!--android:layout_below="@+id/image_slider"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_marginStart="17dp" />-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/title"-->
+    <!--android:text="Bright Bridge"-->
+    <!--android:textSize="20sp"-->
+    <!--android:paddingTop="2dp"-->
+    <!--android:paddingLeft="12dp"-->
+    <!--android:layout_below="@id/image_slider"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->
+    <!--android:paddingLeft="58dp"-->
+    <!--android:layout_below="@id/title_container"-->
+    <!--android:id="@+id/description"-->
+    <!--android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. "-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_below="@id/description"-->
+    <!--android:id="@+id/info_container"-->
+    <!--android:paddingTop="4dp"-->
+    <!--android:paddingBottom="4dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/time"-->
+    <!--android:padding="4dp"-->
+    <!--android:paddingLeft="16dp"-->
+    <!--android:paddingRight="16dp"-->
+    <!--android:layout_width="26dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/ic_av_timer_black_24dp"-->
+    <!--android:layout_below="@+id/image_slider"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_marginStart="17dp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/distance"-->
+    <!--android:text="Eta - 20 min"-->
+    <!--android:paddingTop="6dp"-->
+    <!--android:paddingLeft="12dp"-->
+    <!--android:layout_below="@id/image_slider"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--</LinearLayout>-->

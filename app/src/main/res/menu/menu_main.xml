@@ -1,0 +1,47 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+         <!--<item-->
+            <!--android:icon="@drawable/ic_home_black_24dp"-->
+            <!--android:id="@+id/map"-->
+            <!--android:title="@string/home" />-->
+
+        <item
+            android:icon="@drawable/ic_history_black_24dp"
+            android:id="@+id/history"
+            android:title="@string/history"/>
+
+        <item
+            android:icon="@drawable/ic_loyalty_black_24dp"
+            android:id="@+id/promos"
+            android:title="@string/promos"/>
+
+        <item
+            android:icon="@drawable/ic_credit_card_black_24dp"
+            android:id="@+id/payment"
+            android:title="@string/payment"/>
+
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:icon="@drawable/ic_settings_black_24dp"
+                    android:id="@+id/settings"
+                    android:title="@string/settings"/>
+
+                <item
+                    android:icon="@drawable/ic_help_black_24dp"
+                    android:id="@+id/about"
+                    android:title="@string/about"/>
+
+                <item
+                    android:icon="@drawable/ic_arrow_back_black_24dp"
+                    android:id="@+id/logout"
+                    android:title="@string/logout"/>
+            </group>
+        </menu>
+
+    </group>
+
+</menu>

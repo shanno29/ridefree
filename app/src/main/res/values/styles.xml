@@ -1,0 +1,24 @@
+<resources>
+
+    <style name="RideFreeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="RideFreeTheme">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+    <style name="RadioButtonTheme" parent="RideFreeTheme">
+        <item name="colorControlActivated">@color/accent</item>
+        <item name="colorControlNormal">@color/primary_dark</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="image"
+            type="int"/>
+
+        <variable
+            name="gravity"
+            type="int"/>
+
+        <variable
+            name="text"
+            type="String"/>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClickListener="@{clickListener}"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClickListener="@{clickListener}"
+            android:src="@{image}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="@{gravity}"
+            android:onClickListener="@{clickListener}"
+            android:text="@{text}"/>
+
+    </LinearLayout>
+</layout>
+
+    <!--        holder.icon.setImageResource(image);
+    -->
