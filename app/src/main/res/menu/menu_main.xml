@@ -2,45 +2,40 @@
 
     <group android:checkableBehavior="single">
 
-         <!--<item-->
-            <!--android:icon="@drawable/ic_home_black_24dp"-->
-            <!--android:id="@+id/map"-->
-            <!--android:title="@string/home" />-->
+        <item
+            android:id="@+id/map"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/home"/>
 
         <item
+            android:id="@+id/rides"
             android:icon="@drawable/ic_history_black_24dp"
-            android:id="@+id/history"
-            android:title="@string/history"/>
+            android:title="@string/rides"/>
 
         <item
-            android:icon="@drawable/ic_loyalty_black_24dp"
             android:id="@+id/promos"
+            android:icon="@drawable/ic_loyalty_black_24dp"
             android:title="@string/promos"/>
 
         <item
-            android:icon="@drawable/ic_credit_card_black_24dp"
             android:id="@+id/payment"
+            android:icon="@drawable/ic_credit_card_black_24dp"
             android:title="@string/payment"/>
 
-        <menu>
-            <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/settings"/>
 
-                <item
-                    android:icon="@drawable/ic_settings_black_24dp"
-                    android:id="@+id/settings"
-                    android:title="@string/settings"/>
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_help_black_24dp"
+            android:title="@string/about"/>
 
-                <item
-                    android:icon="@drawable/ic_help_black_24dp"
-                    android:id="@+id/about"
-                    android:title="@string/about"/>
-
-                <item
-                    android:icon="@drawable/ic_arrow_back_black_24dp"
-                    android:id="@+id/logout"
-                    android:title="@string/logout"/>
-            </group>
-        </menu>
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_arrow_back_black_24dp"
+            android:title="@string/logout"/>
 
     </group>
 

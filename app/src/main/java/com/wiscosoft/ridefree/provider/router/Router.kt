@@ -14,15 +14,15 @@ interface Router {
 
   fun about(): Fragment
 
-  fun history(): Fragment
-
-  fun historyDetail(id: Int): Fragment
+  fun rideAdd(): Fragment
+  fun rideList(): Fragment
+  fun rideInfo(id: Int): Fragment
 
   fun map(): Fragment
 
   fun paymentAdd(): Fragment
-
-  fun payment(): Fragment
+  fun paymentList(): Fragment
+  fun paymentInfo(id: Int): Fragment
 
   fun promos(): Fragment
 

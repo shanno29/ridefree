@@ -80,9 +80,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-//    testOptions {
-//        unitTests.returnDefaultValues = true
-//    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 
     junitJacoco {
         includeNoLocationClasses = true
@@ -161,18 +161,23 @@ dependencies {
     implementation 'com.patloew.rxlocation:rxlocation:1.0.3'
     implementation 'com.github.raviteja06:RxPermissions:1.2.0'
     implementation 'com.github.miguelbcr:RxPaparazzo:0.5.4-2.x'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design-kotlin:2.0.0'
     implementation 'com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC3'
-//    implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
+    implementation 'com.trello.navi2:navi:2.0'
+    implementation "com.trello.rxlifecycle2:rxlifecycle:$rxLifecycle"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-android:$rxLifecycle"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-navi:$rxLifecycle"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxLifecycle"
 
     // UI
     implementation('com.mikepenz:aboutlibraries:6.0.1@aar') { transitive = true }
     implementation 'com.github.Ilhasoft:data-binding-validator:0.6.4'
-//    implementation 'com.github.arimorty:floatingsearchview:2.0.3'
-//    implementation 'com.sothree.slidinguppanel:library:3.3.1'
+    //    implementation 'com.github.arimorty:floatingsearchview:2.0.3'
+    //    implementation 'com.sothree.slidinguppanel:library:3.3.1'
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
     implementation 'com.braintreepayments:card-form:3.0.5'
-//    implementation 'com.squareup.picasso:picasso:2.5.2'
+    //    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // Unit Tests
     //testImplementation 'junit:junit:4.12'

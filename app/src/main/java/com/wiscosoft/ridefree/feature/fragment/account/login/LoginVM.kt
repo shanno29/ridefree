@@ -12,8 +12,8 @@ constructor(private val repo: Repo, private val prefs: Prefs, var user: User) {
 
   fun login(): Flowable<User> {
     return repo.userApi().logon(user)
-        .doOnNext { prefs.owner().set(it.id) }
-        .compose(threads())
+      .doOnNext { prefs.owner().set(it.id) }
+      .compose(threads())
   }
 
   fun getReason(error: Throwable): String {

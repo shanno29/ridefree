@@ -1,6 +1,8 @@
 package com.wiscosoft.ridefree.feature.fragment.settings
 
+import android.view.Gravity.START
 import com.github.salomonbrys.kodein.instance
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import com.wiscosoft.ridefree.R.layout.fragment_list
 import com.wiscosoft.ridefree.core.base.BaseFragment
 import com.wiscosoft.ridefree.core.base.Config
@@ -21,30 +23,31 @@ class SettingsFragment : BaseFragment<FragmentListBinding>() {
   }
 
   private fun showInfo() {
-    sub.add(vm.user().subscribe(
-        { onContent(it) },
-        { showError(it) }
-    ))
+    vm.user()
+      .bindToLifecycle(provider)
+      .subscribe(this::onContent, this::showError)
   }
 
   private fun onContent(user: User) {
     binding.recyclerView.withModels {
       titleTextCard {
         text(user.userName)
-        title("Username:")
+        title("Username")
+        gravity(START)
         id(randomId())
       }
       titleTextCard {
         text(user.passWord)
-        title("Password:")
+        title("Password")
+        gravity(START)
         id(randomId())
       }
       vm.networkInfo().forEach {
         titleTextCard {
-          text(it)
           title("Cookies")
           id(randomId())
-
+          gravity(START)
+          text(it)
         }
       }
     }

@@ -1,29 +1,23 @@
 <resources>
     <string name="app_name">RideFree</string>
 
-    <string name="fabric_key">fd607e5d400dbc84e200e3360b2ece2595080b90</string>
-
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="home">Home</string>
-    <string name="destinations">Destinations</string>
-    <string name="history">History</string>
+    <string name="rides">Rides</string>
     <string name="promos">Promos</string>
     <string name="payment">Payment</string>
     <string name="about">About</string>
     <string name="settings">Settings</string>
-    <string name="sandbox">Sandbox</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
-    <string name="submit">Submit</string>
     <string name="logout">Logout</string>
     <string name="enter_password">Enter Password</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
-    <string name="reenter_password">Reenter Password</string>
     <string name="password">Password</string>
-    <string name="transactions">Transactions</string>
-    <string name="payment_add">Payment Add</string>
-    <string name="account">Account</string>
+  <string name="destination">Destination</string>
+    <string name="pickup">Pickup</string>
+  <string name="submit">Submit</string>
 
 </resources>

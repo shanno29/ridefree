@@ -10,14 +10,14 @@ class SplashVM
 constructor(private val permissions: Permissions) {
 
   fun checkPermissions(): Flowable<Boolean> = permissions
-      .checkPermission(WRITE_EXTERNAL_STORAGE, ACCESS_FINE_LOCATION, CAMERA)
-      .map { it.granted == Permission.PERMISSION_GRANTED }
-      .compose(threads())
+    .checkPermission(WRITE_EXTERNAL_STORAGE, ACCESS_FINE_LOCATION, CAMERA)
+    .map { it.granted == Permission.PERMISSION_GRANTED }
+    .compose(threads())
 
 
   fun requestPermissions(): Flowable<Boolean> = permissions
-      .requestPermission(WRITE_EXTERNAL_STORAGE, ACCESS_FINE_LOCATION, CAMERA)
-      .map { it.granted == Permission.PERMISSION_GRANTED }
-      .compose(threads())
+    .requestPermission(WRITE_EXTERNAL_STORAGE, ACCESS_FINE_LOCATION, CAMERA)
+    .map { it.granted == Permission.PERMISSION_GRANTED }
+    .compose(threads())
 
 }

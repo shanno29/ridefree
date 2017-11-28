@@ -12,9 +12,9 @@ constructor(private val repo: Repo, private val prefs: Prefs) {
 
   fun logout(): Flowable<User> {
     return repo.userApi().get(prefs.owner().get())
-        .flatMap { repo.userApi().logoff(it) }
-        .doOnNext { prefs.clearAll() }
-        .compose(threads())
+      .flatMap { repo.userApi().logoff(it) }
+      .doOnNext { prefs.clearAll() }
+      .compose(threads())
   }
 
   fun getReason(error: Throwable): String {

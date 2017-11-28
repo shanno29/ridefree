@@ -14,13 +14,13 @@ class RideModule {
   val bind = Kodein.Module {
     bind<RideNetwork>() with singleton { rideNetwork(instance()) }
     bind<RideStorage>() with singleton { rideStorage(instance()) }
-    bind<RideApi>() with singleton { rideApi(instance()) }
+    bind<RideApi>() with singleton { rideApi(instance(), instance()) }
   }
 
   private fun rideNetwork(retrofit: Retrofit): RideNetwork = retrofit.create(RideNetwork::class.java)
 
   private fun rideStorage(storageContainer: StorageContainer): RideStorage = storageContainer.rideStorage()
 
-  private fun rideApi(storage: RideStorage): RideApi = RideApiImp(storage)
+  private fun rideApi(network: RideNetwork, storage: RideStorage): RideApi = RideApiImp(network, storage)
 
 }

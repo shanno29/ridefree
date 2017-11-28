@@ -5,15 +5,18 @@ import com.wiscosoft.ridefree.feature.fragment.about.AboutFragment
 import com.wiscosoft.ridefree.feature.fragment.account.login.LoginFragment
 import com.wiscosoft.ridefree.feature.fragment.account.logout.LogoutFragment
 import com.wiscosoft.ridefree.feature.fragment.account.register.RegisterFragment
-import com.wiscosoft.ridefree.feature.fragment.history.detail.HistoryDetailFragment
-import com.wiscosoft.ridefree.feature.fragment.history.list.HistoryListFragment
 import com.wiscosoft.ridefree.feature.fragment.map.MapFragment
-import com.wiscosoft.ridefree.feature.fragment.payments.add.PaymentAddFragment
-import com.wiscosoft.ridefree.feature.fragment.payments.list.PaymentsListFragment
+import com.wiscosoft.ridefree.feature.fragment.payments.PaymentAddFragment
+import com.wiscosoft.ridefree.feature.fragment.payments.PaymentInfoFragment
+import com.wiscosoft.ridefree.feature.fragment.payments.PaymentListFragment
 import com.wiscosoft.ridefree.feature.fragment.promos.PromosFragment
+import com.wiscosoft.ridefree.feature.fragment.rides.RideAddFragment
+import com.wiscosoft.ridefree.feature.fragment.rides.RideInfoFragment
+import com.wiscosoft.ridefree.feature.fragment.rides.RidesListFragment
 import com.wiscosoft.ridefree.feature.fragment.settings.SettingsFragment
 
 class RouterImp : Router {
+
 
   override fun register(): Fragment = RegisterFragment()
 
@@ -25,29 +28,27 @@ class RouterImp : Router {
 
   override fun map(): Fragment = MapFragment()
 
-  override fun paymentAdd(): Fragment = PaymentAddFragment()
-
-  override fun payment(): Fragment = PaymentsListFragment()
 
   override fun promos(): Fragment = PromosFragment()
 
   override fun settings(): Fragment = SettingsFragment()
 
-  override fun history(): Fragment = HistoryListFragment()
+  override fun paymentAdd(): Fragment = PaymentAddFragment()
+  override fun paymentList(): Fragment = PaymentListFragment()
+  override fun paymentInfo(id: Int): Fragment = PaymentInfoFragment().also { it.id = id }
 
-  override fun historyDetail(id: Int): Fragment = HistoryDetailFragment().also { it.rideId = id }
+  override fun rideAdd(): Fragment = RideAddFragment()
+  override fun rideList(): Fragment = RidesListFragment()
+  override fun rideInfo(id: Int): Fragment = RideInfoFragment().also { it.id = id }
 
   override fun fromTitle(name: String): Fragment = when (name) {
-    "Login" -> login()
-    "Register" -> register()
-    "About" -> about()
-    "History" -> history()
     "Home" -> map()
-    "Logout" -> logout()
+    "Rides" -> rideList()
     "Promos" -> promos()
+    "Payment" -> paymentList()
     "Settings" -> settings()
-    "Payment" -> payment()
-    "Payment Add" -> paymentAdd()
+    "Logout" -> logout()
+    "About" -> about()
     else -> Fragment()
   }
 

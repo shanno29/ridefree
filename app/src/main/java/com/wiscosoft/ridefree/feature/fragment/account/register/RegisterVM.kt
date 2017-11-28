@@ -11,8 +11,8 @@ constructor(private val repo: Repo, var user: User) {
 
   fun register(): Flowable<User> {
     return repo.userApi()
-        .register(user)
-        .compose(threads())
+      .register(user)
+      .compose(threads())
   }
 
   fun getReason(error: Throwable): String {

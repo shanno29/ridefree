@@ -3,17 +3,18 @@ package com.wiscosoft.ridefree.domain.ride
 import io.reactivex.Flowable
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.QueryMap
 
 interface RideNetwork {
 
   @POST("RIDE/VIEW")
-  fun all(@Body maxResults: Int, offsetResults: Int): Flowable<List<Ride>>
+  fun all(@QueryMap queryMap: Map<String, String>): Flowable<List<Ride>>
 
   @POST("RIDE/VIEW/{id}")
   fun get(@Body id: Int): Flowable<Ride>
 
   @POST("RIDE/REQUEST")
-  fun add(@Body request: Ride): Flowable<Ride>
+  fun add(@Body params: Map<String, String>): Flowable<Map<String, String>>
 
   @POST("RIDE/MODIFY")
   fun modify(@Body request: Ride): Flowable<Ride>

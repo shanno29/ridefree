@@ -1,12 +1,12 @@
 package com.wiscosoft.ridefree.feature.fragment.promos
 
+import com.airbnb.epoxy.DataBindingEpoxyModel
 import com.github.salomonbrys.kodein.instance
 import com.wiscosoft.ridefree.R.layout.fragment_list
+import com.wiscosoft.ridefree.TitleTextCardBindingModel_
 import com.wiscosoft.ridefree.core.base.BaseFragment
 import com.wiscosoft.ridefree.core.base.Config
-import com.wiscosoft.ridefree.core.extensions.withModels
 import com.wiscosoft.ridefree.databinding.FragmentListBinding
-import com.wiscosoft.ridefree.titleTextCard
 
 @Config(title = "Promos", layout = fragment_list)
 class PromosFragment : BaseFragment<FragmentListBinding>() {
@@ -14,17 +14,21 @@ class PromosFragment : BaseFragment<FragmentListBinding>() {
   private val vm: PromosVM by injector.instance()
 
   override fun onReady() {
-    onEmpty()
+    showPromos()
   }
 
-  private fun onEmpty() {
-    binding.recyclerView.withModels {
-      titleTextCard {
-        title(vm.title)
-        text(vm.text)
-        id(vm.id)
+  private fun showPromos() {
+    binding.recyclerView.setModels(empty())
+  }
+
+  private fun empty(): List<DataBindingEpoxyModel> {
+    return listOf(
+      TitleTextCardBindingModel_().apply {
+        title(vm.empty.title)
+        text(vm.empty.text)
+        id(vm.empty.id)
       }
-    }
+    )
   }
 
 }

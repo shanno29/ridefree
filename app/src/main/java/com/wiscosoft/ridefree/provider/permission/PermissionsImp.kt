@@ -12,16 +12,16 @@ constructor(private val permissionHelper: PermissionObservable, private val cont
 
   override fun checkPermission(vararg permissions: String): Flowable<Permission> {
     return permissionHelper.checkThePermissionStatus(context, *permissions)
-        .toFlowable(LATEST)
-        .compose(log())
+      .toFlowable(LATEST)
+      .compose(log())
 
   }
 
   override fun requestPermission(vararg permissions: String): Flowable<Permission> {
     return permissionHelper
-        .request(context, *permissions)
-        .toFlowable(LATEST)
-        .compose(log())
+      .request(context, *permissions)
+      .toFlowable(LATEST)
+      .compose(log())
   }
 
 

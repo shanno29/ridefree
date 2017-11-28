@@ -20,8 +20,8 @@ class GpsModule {
 
   private fun locationRequest(): LocationRequest {
     return create()
-        .setPriority(PRIORITY_HIGH_ACCURACY)
-        .setInterval(5000)
+      .setPriority(PRIORITY_HIGH_ACCURACY)
+      .setInterval(5000)
   }
 
   private fun rxLocation(context: Context): RxLocation {

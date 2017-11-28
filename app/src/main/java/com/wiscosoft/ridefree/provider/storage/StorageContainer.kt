@@ -13,7 +13,7 @@ import com.wiscosoft.ridefree.domain.ride.status.StatusConverter
 import com.wiscosoft.ridefree.domain.user.User
 import com.wiscosoft.ridefree.domain.user.UserStorage
 
-@Database(version = 26, entities = arrayOf(Payment::class, Place::class, Ride::class, User::class))
+@Database(version = 30, entities = arrayOf(Payment::class, Place::class, Ride::class, User::class))
 @TypeConverters(Converters::class, StatusConverter::class)
 abstract class StorageContainer : RoomDatabase() {
 

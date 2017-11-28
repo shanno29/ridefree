@@ -17,9 +17,9 @@ class StorageModule {
 
   private fun roomDatabase(path: String, context: Context): RoomDatabase {
     return Room.databaseBuilder(context, StorageContainer::class.java, path)
-        .fallbackToDestructiveMigration()
-        .allowMainThreadQueries()
-        .build()
+      .fallbackToDestructiveMigration()
+      .allowMainThreadQueries()
+      .build()
   }
 
   private fun storageContainer(roomDatabase: RoomDatabase): StorageContainer {

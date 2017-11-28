@@ -1,0 +1,88 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="vm"
+      type="com.wiscosoft.ridefree.feature.fragment.rides.RidesVM"/>
+  </data>
+
+
+  <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light">
+
+
+    <android.support.v7.widget.CardView
+      android:id="@+id/card"
+      style="@style/CardViewStyle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_margin">
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/etPickupLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:errorTextAppearance="@style/TextLabel"
+        app:hintTextAppearance="@style/TextLabel">
+
+        <android.support.design.widget.TextInputEditText
+          android:id="@+id/etPickup"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:hint="@string/pickup"
+          android:text="@={vm.ride.pickup}"
+          android:textSize="20sp"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/etRestaurantIdLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPickupLayout"
+        android:layout_centerHorizontal="true">
+
+        <android.support.design.widget.TextInputEditText
+          android:id="@+id/etRestaurantId"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/etPickup"
+          android:layout_centerHorizontal="true"
+          android:hint="@string/destination"
+          android:inputType="text"
+          android:text="@={vm.ride.restaurantId}"
+          android:textSize="20sp"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.v7.widget.AppCompatButton
+        android:layout_marginTop="12dp"
+        android:id="@+id/ride_submit"
+        android:layout_below="@id/etRestaurantIdLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:textColor="#FFFF"
+        android:layout_alignParentEnd="true"
+        android:textSize="16sp"
+        app:backgroundTint="@color/accent"/>
+
+      </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+  </android.support.design.widget.CoordinatorLayout>
+
+</layout>
+

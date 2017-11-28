@@ -15,7 +15,7 @@ constructor(private val repo: Repo, val prefs: Prefs) {
 
   fun setUser(user: User): Flowable<User> {
     return repo.userApi().modify(user)
-        .compose(threads())
+      .compose(threads())
   }
 
 }

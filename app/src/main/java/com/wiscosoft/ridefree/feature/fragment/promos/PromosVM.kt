@@ -1,10 +1,8 @@
 package com.wiscosoft.ridefree.feature.fragment.promos
 
-class PromosVM
-constructor() {
+import com.wiscosoft.ridefree.core.base.EmptyListVM
 
-  var id = 0
-  var title = "Promos"
-  var text = "Check Back In A Future Update!"
+class PromosVM
+constructor(val empty: EmptyListVM) {
 
 }

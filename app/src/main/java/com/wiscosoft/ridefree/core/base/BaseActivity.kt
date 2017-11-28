@@ -3,23 +3,26 @@ package com.wiscosoft.ridefree.core.base
 import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.github.salomonbrys.kodein.KodeinInjector
 import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
+import com.trello.navi2.component.support.NaviAppCompatActivity
+import com.trello.rxlifecycle2.LifecycleProvider
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import com.trello.rxlifecycle2.navi.NaviLifecycle.createActivityLifecycleProvider
 import io.reactivex.Flowable.fromIterable
-import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseActivity<Binding : ViewDataBinding> : AppCompatActivity(), AppCompatActivityInjector {
+abstract class BaseActivity<Binding : ViewDataBinding> : NaviAppCompatActivity(), AppCompatActivityInjector {
 
-  internal var config = javaClass.getAnnotation(Config::class.java)
+  internal val config: Config = javaClass.getAnnotation(Config::class.java)
   override val injector: KodeinInjector = KodeinInjector()
-  internal val sub = CompositeDisposable()
-
+  lateinit var provider: LifecycleProvider<ActivityEvent>
   lateinit var binding: Binding
   abstract fun onReady()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    provider = createActivityLifecycleProvider(this)
     binding = setContentView(this, config.layout)
     initializeInjector()
     setupToolbar()
@@ -31,19 +34,19 @@ abstract class BaseActivity<Binding : ViewDataBinding> : AppCompatActivity(), Ap
   }
 
   override fun onDestroy() {
-    sub.clear()
     binding.unbind()
+    destroyInjector()
     super.onDestroy()
   }
 
   private fun setupToolbar() {
     supportFragmentManager.addOnBackStackChangedListener {
-      sub.add(fromIterable(supportFragmentManager.fragments)
-          .lastElement()
-          .cast(BaseFragment::class.java)
-          .map { it.config.title }
-          .subscribe(this::setTitle)
-      )
+      fromIterable(supportFragmentManager.fragments).lastElement()
+        .bindToLifecycle(provider)
+        .cast(BaseFragment::class.java)
+        .map { it.config.title }
+        .subscribe(this::setTitle)
+
     }
   }
 

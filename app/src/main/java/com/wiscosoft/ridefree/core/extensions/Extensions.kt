@@ -10,16 +10,16 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyRecyclerView
-import com.wiscosoft.ridefree.R
 import com.wiscosoft.ridefree.R.anim.slide_from_left
 import com.wiscosoft.ridefree.R.anim.slide_to_left
+import com.wiscosoft.ridefree.R.id.container
 
 
 /*
  * Fragment
  */
 
-fun Fragment.showError(throwable: Throwable) = showMessage(throwable.localizedMessage)
+fun Fragment.showError(throwable: Throwable) = this.showMessage(throwable.localizedMessage)!!
 
 fun Fragment.showMessage(msg: String) = view?.let { make(it, msg, LENGTH_LONG).show() }
 
@@ -27,9 +27,12 @@ fun Fragment.hideToolbar() = (activity as AppCompatActivity).supportActionBar?.h
 
 fun Fragment.hideKeyboard() = view?.let { activity.hideKeyboard(it) }
 
-fun Fragment.goTo(fragment: Fragment) = (activity as AppCompatActivity).goTo(fragment)
+fun Fragment.goTo(fragment: Fragment): Unit = (activity as AppCompatActivity).goTo(fragment)
 
-fun Fragment.goBack() = apply { hideKeyboard() }.apply { fragmentManager.popBackStack() }
+fun Fragment.goBack() {
+  hideKeyboard()
+  fragmentManager.popBackStack()
+}
 
 
 /*
@@ -38,7 +41,7 @@ fun Fragment.goBack() = apply { hideKeyboard() }.apply { fragmentManager.popBack
 
 fun Context.hideKeyboard(view: View) {
   (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
-      .hideSoftInputFromWindow(view.windowToken, 0)
+    .hideSoftInputFromWindow(view.windowToken, 0)
 }
 
 
@@ -48,10 +51,10 @@ fun Context.hideKeyboard(view: View) {
 
 fun AppCompatActivity.goTo(fragment: Fragment) {
   supportFragmentManager.beginTransaction()
-      .setCustomAnimations(slide_from_left, slide_to_left, slide_from_left, slide_to_left)
-      .replace(R.id.container, fragment)
-      .addToBackStack(null)
-      .commit()
+    .setCustomAnimations(slide_from_left, slide_to_left, slide_from_left, slide_to_left)
+    .replace(container, fragment)
+    .addToBackStack(null)
+    .commit()
 }
 
 
@@ -61,10 +64,7 @@ fun AppCompatActivity.goTo(fragment: Fragment) {
 
 fun EpoxyRecyclerView.withModels(buildModelsCallback: EpoxyController.() -> Unit) {
   setControllerAndBuildModels(object : EpoxyController() {
-    override fun buildModels() {
-      buildModelsCallback()
-    }
+    override fun buildModels() { buildModelsCallback() }
   })
 }
-
 

@@ -30,25 +30,17 @@ class NetworkModule {
     bind() from singleton { retrofit(instance("api"), instance(), instance(), instance()) } //TODO
   }
 
-  private fun gson(): Gson {
-    return Gson()
-  }
+  private fun gson(): Gson = Gson()
 
-  private fun gsonFactory(gson: Gson): GsonConverterFactory {
-    return GsonConverterFactory.create(gson)
-  }
+  private fun gsonFactory(gson: Gson): GsonConverterFactory = GsonConverterFactory.create(gson)
 
-  private fun rxFactory(): RxJava2CallAdapterFactory {
-    return RxJava2CallAdapterFactory.create()
-  }
+  private fun rxFactory(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
 
-  private fun cache(context: Context): Cache {
-    return Cache(context.cacheDir, (10 * 1024 * 1024).toLong())
-  }
+  private fun cache(context: Context): Cache = Cache(context.cacheDir, (10 * 1024 * 1024).toLong())
 
   private fun loggingInterceptor(): Interceptor {
     return HttpLoggingInterceptor()
-        .setLevel(BODY)
+      .setLevel(BODY)
   }
 
   private fun requestWithAuth(prefs: Prefs) = Interceptor {
@@ -65,19 +57,19 @@ class NetworkModule {
 
   private fun okHttpClient(cache: Cache, logger: Interceptor, req: Interceptor, res: Interceptor): OkHttpClient {
     return OkHttpClient.Builder()
-        .addInterceptor(logger)
-        .addInterceptor(req)
-        .addInterceptor(res)
-        .cache(cache)
-        .build()
+      .addInterceptor(logger)
+      .addInterceptor(req)
+      .addInterceptor(res)
+      .cache(cache)
+      .build()
   }
 
   private fun retrofit(path: String, gsonConverter: GsonConverterFactory, rxConverter: RxJava2CallAdapterFactory, client: OkHttpClient): Retrofit {
     return Retrofit.Builder().baseUrl(path)
-        .addCallAdapterFactory(rxConverter)
-        .addConverterFactory(gsonConverter)
-        .client(client)
-        .build()
+      .addCallAdapterFactory(rxConverter)
+      .addConverterFactory(gsonConverter)
+      .client(client)
+      .build()
   }
 
 }

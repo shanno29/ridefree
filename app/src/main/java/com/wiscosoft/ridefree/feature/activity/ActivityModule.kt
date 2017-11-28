@@ -22,13 +22,13 @@ class ActivityModule {
 
   private fun libsAdapter(context: Context): FastAdapter<IItem<*, *>> {
     return LibsBuilder()
-        .withAboutDescription("Created By Matthew Shannon")
-        .withAboutAppName("RideFree 2017")
-        .withActivityTheme(R.style.RideFreeTheme)
-        .withVersionShown(true)
-        .withLicenseShown(true)
-        .withAutoDetect(true)
-        .adapter(context)
+      .withAboutDescription("Created By Matthew Shannon")
+      .withAboutAppName("RideFree 2017")
+      .withActivityTheme(R.style.RideFreeTheme)
+      .withVersionShown(true)
+      .withLicenseShown(true)
+      .withAutoDetect(true)
+      .adapter(context)
   }
 
 }
