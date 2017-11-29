@@ -57,7 +57,6 @@ fun AppCompatActivity.goTo(fragment: Fragment) {
     .commit()
 }
 
-
 /*
  * RecyclerView
  */

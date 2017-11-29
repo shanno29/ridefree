@@ -4,8 +4,6 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
-import com.wiscosoft.ridefree.domain.user.api.UserApi
-import com.wiscosoft.ridefree.domain.user.api.UserApiImp
 import com.wiscosoft.ridefree.provider.storage.StorageContainer
 import retrofit2.Retrofit
 

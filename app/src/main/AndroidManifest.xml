@@ -19,7 +19,8 @@
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/RideFreeTheme">
 
-        <activity android:name="com.wiscosoft.ridefree.feature.activity.splash.SplashActivity"
+        <activity
+          android:name="com.wiscosoft.ridefree.core.main.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:label="@string/app_name"
             android:theme="@style/RideFreeTheme"
@@ -29,13 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="com.wiscosoft.ridefree.feature.activity.main.MainActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:label="@string/app_name"
-            android:theme="@style/RideFreeTheme"
-            android:configChanges="orientation|screenSize"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

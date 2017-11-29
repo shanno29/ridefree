@@ -1,0 +1,38 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+  implementation gradleApi()
+  implementation localGroovy()
+
+  implementation "com.android.tools.build:gradle:${project.androidBuildToolsVersion}"
+  implementation "org.aspectj:aspectjtools:${project.aspectjVersion}"
+  implementation "org.aspectj:aspectjrt:${project.aspectjVersion}"
+
+  testImplementation "junit:junit:${project.junitVersion}"
+}
+
+groovydoc {
+  includePrivate = false
+}
+
+//noinspection GroovyAssignabilityCheck
+task javadocJar(type: Jar, dependsOn: ['groovydoc']) {
+  classifier = 'javadoc'
+  from 'build/docs/groovydoc'
+}
+
+//noinspection GroovyAssignabilityCheck
+task sourcesJar(type: Jar, dependsOn: classes) {
+  classifier = 'sources'
+  from sourceSets.main.allSource
+}
+
+artifacts {
+  archives jar
+  archives sourcesJar
+}

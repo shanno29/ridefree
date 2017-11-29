@@ -14,7 +14,7 @@ interface RideNetwork {
   fun get(@Body id: Int): Flowable<Ride>
 
   @POST("RIDE/REQUEST")
-  fun add(@Body params: Map<String, String>): Flowable<Map<String, String>>
+  fun add(@Body body: Map<String, String>): Flowable<Ride>
 
   @POST("RIDE/MODIFY")
   fun modify(@Body request: Ride): Flowable<Ride>

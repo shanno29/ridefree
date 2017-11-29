@@ -10,6 +10,7 @@ import io.reactivex.Flowable
 class PermissionsImp
 constructor(private val permissionHelper: PermissionObservable, private val context: Context) : Permissions {
 
+//  @RxLogFlowable
   override fun checkPermission(vararg permissions: String): Flowable<Permission> {
     return permissionHelper.checkThePermissionStatus(context, *permissions)
       .toFlowable(LATEST)

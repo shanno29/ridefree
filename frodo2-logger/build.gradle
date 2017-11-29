@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+  implementation "org.jetbrains:annotations:$project.annotationsVersion"
+  implementation "org.aspectj:aspectjrt:$project.aspectjVersion"
+  implementation "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
+  implementation project(':frodo2-api')
+
+  testImplementation "junit:junit:$project.junitVersion"
+  testImplementation "org.assertj:assertj-core:$project.assertJVersion"
+  testImplementation "org.mockito:mockito-core:$project.mockitoVersion"
+}
+
+//noinspection GroovyAssignabilityCheck
+task javadocJar(type: Jar, dependsOn: ['javadoc']) {
+  classifier = 'javadoc'
+  from 'build/docs/javadoc'
+}
+
+artifacts {
+  archives jar
+}

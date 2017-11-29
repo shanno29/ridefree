@@ -4,7 +4,9 @@ import android.support.v4.app.Fragment
 
 interface Router {
 
-  fun fromTitle(name: String): Fragment
+  fun fromTitle(name: CharSequence): Fragment
+
+  fun splash(): Fragment
 
   fun register(): Fragment
 

@@ -1,33 +1,35 @@
 package com.wiscosoft.ridefree.provider.router
 
 import android.support.v4.app.Fragment
-import com.wiscosoft.ridefree.feature.fragment.about.AboutFragment
-import com.wiscosoft.ridefree.feature.fragment.account.login.LoginFragment
-import com.wiscosoft.ridefree.feature.fragment.account.logout.LogoutFragment
-import com.wiscosoft.ridefree.feature.fragment.account.register.RegisterFragment
-import com.wiscosoft.ridefree.feature.fragment.map.MapFragment
-import com.wiscosoft.ridefree.feature.fragment.payments.PaymentAddFragment
-import com.wiscosoft.ridefree.feature.fragment.payments.PaymentInfoFragment
-import com.wiscosoft.ridefree.feature.fragment.payments.PaymentListFragment
-import com.wiscosoft.ridefree.feature.fragment.promos.PromosFragment
-import com.wiscosoft.ridefree.feature.fragment.rides.RideAddFragment
-import com.wiscosoft.ridefree.feature.fragment.rides.RideInfoFragment
-import com.wiscosoft.ridefree.feature.fragment.rides.RidesListFragment
-import com.wiscosoft.ridefree.feature.fragment.settings.SettingsFragment
+import com.wiscosoft.ridefree.feature.about.AboutFragment
+import com.wiscosoft.ridefree.feature.account.login.LoginFragment
+import com.wiscosoft.ridefree.feature.account.logout.LogoutFragment
+import com.wiscosoft.ridefree.feature.account.register.RegisterFragment
+import com.wiscosoft.ridefree.feature.map.MapFragment
+import com.wiscosoft.ridefree.feature.payments.PaymentAddFragment
+import com.wiscosoft.ridefree.feature.payments.PaymentInfoFragment
+import com.wiscosoft.ridefree.feature.payments.PaymentListFragment
+import com.wiscosoft.ridefree.feature.promos.PromosFragment
+import com.wiscosoft.ridefree.feature.rides.RideAddFragment
+import com.wiscosoft.ridefree.feature.rides.RideInfoFragment
+import com.wiscosoft.ridefree.feature.rides.RidesListFragment
+import com.wiscosoft.ridefree.feature.settings.SettingsFragment
+import com.wiscosoft.ridefree.feature.splash.SplashFragment
 
-class RouterImp : Router {
+class RouterImp
+  constructor(private val loginFragment: LoginFragment): Router {
 
+  override fun splash(): Fragment = SplashFragment()
 
   override fun register(): Fragment = RegisterFragment()
 
-  override fun login(): Fragment = LoginFragment()
+  override fun login(): Fragment = loginFragment
 
   override fun logout(): Fragment = LogoutFragment()
 
   override fun about(): Fragment = AboutFragment()
 
   override fun map(): Fragment = MapFragment()
-
 
   override fun promos(): Fragment = PromosFragment()
 
@@ -41,7 +43,7 @@ class RouterImp : Router {
   override fun rideList(): Fragment = RidesListFragment()
   override fun rideInfo(id: Int): Fragment = RideInfoFragment().also { it.id = id }
 
-  override fun fromTitle(name: String): Fragment = when (name) {
+  override fun fromTitle(name: CharSequence): Fragment = when (name) {
     "Home" -> map()
     "Rides" -> rideList()
     "Promos" -> promos()
