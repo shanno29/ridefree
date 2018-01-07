@@ -1,2 +1,0 @@
--optimizationpasses 5
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*

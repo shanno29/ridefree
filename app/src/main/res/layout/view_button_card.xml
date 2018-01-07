@@ -1,24 +1,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   >
 
-  <data>
+  <!--<data>-->
 
-    <variable
-      name="title"
-      type="String"/>
+    <!--<variable-->
+      <!--name="title"-->
+      <!--type="String"/>-->
 
-    <variable
-      name="gravity"
-      type="int"/>
+    <!--<variable-->
+      <!--name="gravity"-->
+      <!--type="int"/>-->
 
-    <variable
-      name="buttonText"
-      type="String"/>
+    <!--<variable-->
+      <!--name="buttonText"-->
+      <!--type="String"/>-->
 
-    <variable
-      name="clickListener"
-      type="android.view.View.OnClickListener"/>
-  </data>
+    <!--<variable-->
+      <!--name="clickListener"-->
+      <!--type="android.view.View.OnClickListener"/>-->
+  <!--</data>-->
 
   <android.support.v7.widget.CardView
     android:id="@+id/card"
@@ -36,8 +36,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:gravity="@{gravity}"
-        android:text="@{title}"
         android:textSize="18sp"
         android:textStyle="bold"
         />
@@ -45,9 +43,7 @@
       <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="@{clickListener}"
-        android:text="@{buttonText}"/>
+        android:layout_gravity="center"/>
 
     </LinearLayout>
 

@@ -1,12 +1,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <data>
+  <!--<data>-->
 
-    <variable
-      name="vm"
-      type="com.wiscosoft.ridefree.feature.rides.RidesVM"/>
-  </data>
+    <!--<variable-->
+      <!--name="ride"-->
+      <!--type="com.wiscosoft.ridefree.domain.ride.Ride"/>-->
+  <!--</data>-->
 
 
   <android.support.design.widget.CoordinatorLayout
@@ -41,7 +41,6 @@
           android:layout_height="wrap_content"
           android:layout_centerHorizontal="true"
           android:hint="@string/pickup"
-          android:text="@={vm.ride.pickup}"
           android:textSize="20sp"/>
 
       </android.support.design.widget.TextInputLayout>
@@ -61,7 +60,6 @@
           android:layout_centerHorizontal="true"
           android:hint="@string/destination"
           android:inputType="text"
-          android:text="@={vm.ride.restaurantId}"
           android:textSize="20sp"/>
 
       </android.support.design.widget.TextInputLayout>

@@ -6,29 +6,30 @@ interface Router {
 
   fun fromTitle(name: CharSequence): Fragment
 
-  fun splash(): Fragment
+  val splash: Fragment
 
-  fun register(): Fragment
+  val register: Fragment
 
-  fun login(): Fragment
+  val login: Fragment
 
-  fun logout(): Fragment
+  val logout: Fragment
 
-  fun about(): Fragment
+  val about: Fragment
 
-  fun rideAdd(): Fragment
-  fun rideList(): Fragment
-  fun rideInfo(id: Int): Fragment
+//  fun rideAdd(): Fragment
+//  fun rideList(): Fragment
+//  fun rideInfo(id: Int): Fragment
 
-  fun map(): Fragment
+  val home: Fragment
 
-  fun paymentAdd(): Fragment
-  fun paymentList(): Fragment
-  fun paymentInfo(id: Int): Fragment
+//  fun paymentAdd(): Fragment
+//  fun paymentList(): Fragment
+//  fun paymentInfo(id: Int): Fragment
 
-  fun promos(): Fragment
+  val promos: Fragment
 
-  fun settings(): Fragment
-
+  val settings: Fragment
 }
+
+
 

@@ -1,47 +1,70 @@
+
+ext {
+    appName = "com.wiscosoft.ridefree"
+
+    minSdk = 16
+    maxSdk = 27
+    buildTools = "27.0.3"
+    gradle = "3.1.0-alpha07"
+
+    support = "27.0.2"
+    room = "1.0.0"
+    gsm = "11.8.0"
+    kotlin = "1.2.10"
+    kodein = "4.1.0"
+    retrofit = "2.3.0"
+    redux = "1.2.1"
+    reduxExtra = "1.2.3"
+    rxjava = "2.1.7"
+    rxkotlin = "2.2.0"
+    okhttp = "3.8.0"
+
+    junit = "4.12"
+    jacoco = "0.10.0"
+    roboElectric = "3.4.2"
+}
+
 buildscript {
-    ext.kotlinVersion = '1.1.60'
-    ext.kodeinVersion = '4.1.0'
-    ext.roomVersion = "1.0.0"
-    ext.retrofitVersion = "2.3.0"
-    ext.supportVersion = "26.1.0"
-    ext.daggerVersion = "2.12"
-    ext.epoxyVersion = "2.7.2"
-    ext.gsmVersion = "11.6.2"
-    ext.rxLifecycle = "2.2.1"
 
     repositories {
         google()
         jcenter()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url = "https://jitpack.io" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-alpha04'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.1'
+        classpath "com.android.tools.build:gradle:3.1.0-alpha07"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.10"
+        classpath "com.vanniktech:gradle-android-junit-jacoco-plugin:0.11.0"
     }
+
 }
 
 allprojects {
     repositories {
         google()
         jcenter()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url = "https://jitpack.io" }
+        maven { url "https://plugins.gradle.org/m2/" }
+
     }
 }
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xmaxerrs" << "500"
-    }
-}
 
 
-tasks.whenTaskAdded { task -> if (task.name == "lint") { task.enabled = false }  }
+
+
+//tasks.whenTaskAdded {
+//    task -> if (task.name == "lint") {
+//        task.enabled = false
+//    }
+//}
+
+//mavenCentral()
+//maven { url "https://jitpack.io" }
+//maven { url "https://plugins.gradle.org/m2/" }

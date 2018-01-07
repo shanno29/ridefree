@@ -1,8 +1,7 @@
 package com.wiscosoft.ridefree.provider.storage
 
 import android.arch.persistence.room.TypeConverter
-import java.lang.Integer.valueOf
-import java.util.*
+import java.util.Date
 
 class Converters {
 
@@ -13,7 +12,7 @@ class Converters {
   fun toTimestamp(date: Date): Long = date.time
 
   @TypeConverter
-  fun intArrayFromString(value: String): List<Int>? = value.split(",").filter { it.isNotEmpty() }.map { valueOf(it) }
+  fun intArrayFromString(value: String): List<Int>? = value.split(",").filter { it.isNotEmpty() }.map { Integer.valueOf(it) }
 
   @TypeConverter
   fun stringFromIntArray(array: List<Int>?): String {
@@ -31,5 +30,4 @@ class Converters {
     array?.forEach { res.append("$it,") }
     return res.toString()
   }
-
 }

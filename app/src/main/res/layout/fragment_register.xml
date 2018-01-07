@@ -1,12 +1,4 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-
-  <data>
-
-    <variable
-      name="vm"
-      type="com.wiscosoft.ridefree.feature.account.register.RegisterVM"/>
-  </data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
   <RelativeLayout
     android:layout_width="match_parent"
@@ -29,8 +21,7 @@
         <android.support.design.widget.TextInputLayout
           android:id="@+id/etUsernameLayout"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:hintTextAppearance="@style/TextLabel">
+          android:layout_height="wrap_content">
 
           <android.support.design.widget.TextInputEditText
             android:id="@+id/etUsername"
@@ -38,12 +29,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/username"
             android:inputType="textPersonName"
-            android:text="@={vm.user.userName}"
-            android:textSize="20sp"
-            app:validateEmpty="@{true}"
-            app:validateMinLength="@{4}"
-            app:validateType='@{"username"}'
-            app:validateTypeAutoDismiss="@{true}"/>
+            android:textSize="20sp"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -51,9 +37,7 @@
           android:id="@+id/etEmailLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_below="@id/etUsernameLayout"
-          app:errorTextAppearance="@style/TextLabel"
-          app:hintTextAppearance="@style/TextLabel">
+          android:layout_below="@id/etUsernameLayout">
 
           <android.support.design.widget.TextInputEditText
             android:id="@+id/etEmail"
@@ -62,13 +46,7 @@
             android:layout_below="@+id/etUsername"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:text="@={vm.user.email}"
-            android:textSize="20sp"
-            app:validateEmpty="@{true}"
-            app:validateMinLength="@{4}"
-            app:validateType='@{"email"}'
-            app:validateTypeAutoDismiss="@{true}"
-            />
+            android:textSize="20sp"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -76,9 +54,7 @@
           android:id="@+id/etPasswordOneLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_below="@id/etEmailLayout"
-          app:errorTextAppearance="@style/TextLabel"
-          app:hintTextAppearance="@style/TextLabel">
+          android:layout_below="@id/etEmailLayout">
 
           <android.support.design.widget.TextInputEditText
             android:id="@+id/etPasswordOne"
@@ -86,12 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/etEmail"
             android:hint="@string/enter_password"
-            android:text="@={vm.user.passWord}"
-            android:textSize="20sp"
-            app:validateEmpty="@{true}"
-            app:validateMinLength="@{4}"
-            app:validateType='@{"password"}'
-            app:validateTypeAutoDismiss="@{true}"/>
+            android:textSize="20sp"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -112,8 +83,7 @@
             android:layout_toStartOf="@+id/btRegister"
             android:text="@string/login"
             android:textColor="@color/accent"
-            android:textSize="16sp"
-            app:backgroundTint="#FFFF"/>
+            android:textSize="16sp"/>
 
           <Button
             android:id="@+id/btRegister"
@@ -124,8 +94,7 @@
             android:layout_alignParentTop="true"
             android:text="@string/register"
             android:textColor="#FFFF"
-            android:textSize="16sp"
-            app:backgroundTint="@color/accent"/>
+            android:textSize="16sp"/>
 
         </RelativeLayout>
 

@@ -1,32 +1,35 @@
 package com.wiscosoft.ridefree.core
 
 import android.app.Application
+import android.content.Context
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinAware
+import com.github.salomonbrys.kodein.bind
+import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.lazy
-import com.github.salomonbrys.kodein.with
+import com.github.salomonbrys.kodein.singleton
 import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
-import com.wiscosoft.ridefree.domain.DomainModule
-import com.wiscosoft.ridefree.feature.FeatureModule
-import com.wiscosoft.ridefree.provider.ProviderModule
+import com.wiscosoft.ridefree.domain.domainModule
+import com.wiscosoft.ridefree.feature.featureModule
+import com.wiscosoft.ridefree.provider.providerModule
+import java.io.File
 
 class App : Application(), KodeinAware {
 
   override val kodein by Kodein.lazy {
-    constant("api") with "https://wiscosoft.co:27010/API/"
-    constant("db") with "data.db"
-    import(ProviderModule().bind)
-    import(DomainModule().bind)
-    import(FeatureModule().bind)
+    import(domainModule)
+    import(providerModule)
+    import(featureModule)
+
+    bind<File>() with singleton {
+      val context: Context = instance()
+      context.cacheDir
+    }
+
   }
 
   override fun onCreate() {
     super.onCreate()
-    readyUp()
-  }
-
-  private fun readyUp() {
     RxPaparazzo.register(this)
   }
-
 }

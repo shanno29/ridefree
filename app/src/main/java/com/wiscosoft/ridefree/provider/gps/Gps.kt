@@ -1,16 +1,15 @@
 package com.wiscosoft.ridefree.provider.gps
 
+import com.google.android.gms.common.GoogleApiAvailability
 import io.reactivex.Flowable
 
 interface Gps {
 
-  fun getLocation(): Flowable<Loc>
+  val googleApi: Flowable<GoogleApiAvailability>
 
-  //fun checkPermissions(): Flowable<Boolean>
+  val settings: Flowable<Boolean>
 
-  fun checkGps(): Flowable<Boolean>
+  val location: Flowable<Position>
 
-  //fun checkConditions(): Flowable<Boolean>
-
-  fun getLocation(query: String): Flowable<Loc>
+  fun location(query: String): Flowable<Position>
 }

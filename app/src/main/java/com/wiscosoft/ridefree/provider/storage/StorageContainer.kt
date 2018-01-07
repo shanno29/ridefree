@@ -4,16 +4,16 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import com.wiscosoft.ridefree.domain.payment.Payment
-import com.wiscosoft.ridefree.domain.payment.PaymentStorage
+import com.wiscosoft.ridefree.domain.payment.api.PaymentStorage
 import com.wiscosoft.ridefree.domain.place.Place
-import com.wiscosoft.ridefree.domain.place.PlaceStorage
+import com.wiscosoft.ridefree.domain.place.api.PlaceStorage
 import com.wiscosoft.ridefree.domain.ride.Ride
-import com.wiscosoft.ridefree.domain.ride.RideStorage
+import com.wiscosoft.ridefree.domain.ride.api.RideStorage
 import com.wiscosoft.ridefree.domain.ride.status.StatusConverter
 import com.wiscosoft.ridefree.domain.user.User
-import com.wiscosoft.ridefree.domain.user.UserStorage
+import com.wiscosoft.ridefree.domain.user.api.UserStorage
 
-@Database(version = 30, entities = arrayOf(Payment::class, Place::class, Ride::class, User::class), exportSchema = false)
+@Database(version = 36, entities = [Payment::class, Place::class, Ride::class, User::class], exportSchema = false)
 @TypeConverters(Converters::class, StatusConverter::class)
 abstract class StorageContainer : RoomDatabase() {
 
@@ -24,5 +24,4 @@ abstract class StorageContainer : RoomDatabase() {
   abstract fun rideStorage(): RideStorage
 
   abstract fun userStorage(): UserStorage
-
 }

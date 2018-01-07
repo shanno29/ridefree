@@ -2,7 +2,7 @@ package com.wiscosoft.ridefree.domain.ride.status
 
 import android.arch.persistence.room.TypeConverter
 
-public class StatusConverter {
+class StatusConverter {
 
   @TypeConverter
   fun fromInteger(value: Int?): Status = when (value) {
@@ -24,5 +24,4 @@ public class StatusConverter {
     Status.CANCELLED -> 4
     else -> -1
   }
-
 }

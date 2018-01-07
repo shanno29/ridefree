@@ -5,22 +5,9 @@ import io.reactivex.Flowable
 
 interface Prefs {
 
+  val cookies: Preference<Set<String>>
 
-  fun owner(): Preference<Int>
-
-  fun ownerRx(): Flowable<Int>
-
-
-  fun firstRun(): Preference<Boolean>
-
-  fun firstRunRx(): Flowable<Boolean>
-
-
-  fun cookies(): Preference<Set<String>>
-
-  fun cookiesRx(): Flowable<Set<String>>
-
+  val cookiesRx: Flowable<Set<String>>
 
   fun clearAll()
-
 }

@@ -1,74 +1,121 @@
 apply plugin: "com.android.application"
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "com.vanniktech.android.junit.jacoco"
 
-kapt { correctErrorTypes = true }
+kapt.correctErrorTypes true
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "27.0.1"
-
-    dataBinding { enabled = true }
-
-    lintOptions { warning "InvalidPackage" }
-    packagingOptions { exclude "META-INF/rxjava.properties" }
-    testOptions { unitTests { includeAndroidResources = true } }
+    buildToolsVersion rootProject.ext.buildTools
+    compileSdkVersion rootProject.ext.maxSdk
+    dataBinding.enabled true
 
     defaultConfig {
-        applicationId "com.wiscosoft.ridefree"
-        minSdkVersion 21
-        targetSdkVersion 26
-//        multiDexEnabled true
+        targetSdkVersion rootProject.ext.maxSdk
+        minSdkVersion rootProject.ext.minSdk
+        applicationId rootProject.ext.appName
         versionCode 1000
         versionName "1"
         resConfigs "en"
-        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+        test.java.srcDirs += "src/test/kotlin"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude "LICENSE.txt"
+        exclude "META-INF/NOTICE"
+        exclude "META-INF/ASL2.0"
+        exclude "META-INF/LICENSE"
+        exclude "META-INF/LICENSE.txt"
+        exclude "META-INF/INDEX.LIST"
+        exclude "META-INF/DEPENDENCIES"
+        exclude "META-INF/rxjava.properties"
+        exclude "META-INF/lib_main.kotlin_module"
+        exclude "META-INF/io.netty.versions.properties"
     }
 
     signingConfigs {
-        release {
-            storeFile file("keystore/release.keystore")
-            keyAlias "alias"
-            storePassword "$System.env.APP_KEY"
-            keyPassword "$System.env.APP_KEY"
-        }
 
         debug {
-            storeFile file("keystore/debug.keystore")
-            keyAlias "androiddebugkey"
-            storePassword "android"
             keyPassword "android"
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            storeFile file("keystore/debug.keystore")
+
+        }
+
+        release {
+            keyAlias "alias"
+            keyPassword "$System.env.APP_KEY"
+            storePassword "$System.env.APP_KEY"
+            storeFile file("keystore/release.keystore")
         }
     }
 
     buildTypes {
 
-        release {
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-header-release.pro', 'proguard-main.pro'
-            signingConfig signingConfigs.release
-            minifyEnabled true
-        }
-
         debug {
             debuggable true
-            versionNameSuffix " Debug"
+            minifyEnabled false
+            versionNameSuffix "Debug"
             testCoverageEnabled true
-            splits.abi.enable = false
-            splits.density.enable = false
-            aaptOptions.cruncherEnabled = false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-header-debug.pro', 'proguard-main.pro'
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
 
-    testOptions { unitTests.returnDefaultValues = true }
+    junitJacoco {
+        jacocoVersion = '0.7.2.201409121644'
+        includeNoLocationClasses = true
+        excludes = [
+            '**/*_*.*',
+            '**/*BR*.*',
+            '**/R.class',
+            '**/*_Impl*.*',
+            '**/R$*.class',
+            '**/*Module*.*',
+            '**/Manifest*.*',
+            'android/**/*.*',
+            '**/*AjcClosure*',
+            '**/Lambda.class',
+            '**/BuildConfig.*',
+            '**/*_*Factory*.*',
+            '**/*Component*.*',
+            '**/AutoValue_*.*',
+            '**/*Lambda.class',
+            '**/Lambda$*.class',
+            '**/*Lambda*.class',
+            '**/*$ViewBinder*.*',
+            '**/*$ViewInjector*.*',
+            '**/*_MembersInjector*.*',
+            '**/*$InjectAdapter.class',
+            '**/*$ModuleAdapter.class',
+            '**/*$ViewInjector*.class',
+            '**/*_MembersInjector.class',
+            '**/*JavascriptBridge.class',
+        ]
+    }
 
-    sourceSets { main.java.srcDirs += 'src/main/kotlin' }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    testOptions.unitTests {
+        includeAndroidResources true
+        returnDefaultValues true
+        all { testLogging.events 'passed', 'skipped', 'failed', 'standardOut', 'standardError' }
     }
 
 }
@@ -76,65 +123,63 @@ android {
 dependencies {
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-    implementation "com.github.salomonbrys.kodein:kodein:$kodeinVersion"
-    implementation "com.github.salomonbrys.kodein:kodein-android:$kodeinVersion"
-    kapt "com.android.databinding:compiler:3.0.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlin"
 
-    // Android Support
-    implementation "com.android.support:design:$supportVersion"
-    implementation "com.android.support:cardview-v7:$supportVersion"
-    implementation "com.android.support:support-v13:$supportVersion"
+    // Android
+    kapt "com.android.databinding:compiler:$rootProject.ext.gradle"
+    implementation "com.android.support:design:$rootProject.ext.support"
+    implementation "com.android.support:cardview-v7:$rootProject.ext.support"
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.support"
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.support"
 
-    // Google Gps Services
-    implementation "com.google.android.gms:play-services-maps:$gsmVersion"
-    implementation "com.google.android.gms:play-services-location:$gsmVersion"
+    // Google (Gps & Maps)
+    implementation "com.google.android.gms:play-services-maps:$rootProject.ext.gsm"
+    implementation "com.google.android.gms:play-services-location:$rootProject.ext.gsm"
 
-    // Epoxy
-    implementation "com.airbnb.android:epoxy:$epoxyVersion"
-    implementation "com.airbnb.android:epoxy-databinding:$epoxyVersion"
-    kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
+    // ROOM (SQL Database)
+    kapt "android.arch.persistence.room:compiler:$rootProject.ext.room"
+    implementation "android.arch.persistence.room:runtime:$rootProject.ext.room"
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.ext.room"
 
-    // ROOM
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    // Retrofit (Networking)
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttp"
 
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.8.0"
+    // Kodein (Dependency Injection)
+    implementation "com.github.salomonbrys.kodein:kodein:$rootProject.ext.kodein"
+    implementation "com.github.salomonbrys.kodein:kodein-android:$rootProject.ext.kodein"
 
-    // RxJava
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
-
-    // RX Libraries
-    implementation 'com.patloew.rxlocation:rxlocation:1.0.3'
-    implementation 'com.github.raviteja06:RxPermissions:1.2.0'
-    implementation "com.github.miguelbcr:RxPaparazzo:0.6.0-2.x"
-    implementation 'com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC3'
-
-    // RxLifecycle
-    implementation 'com.trello.navi2:navi:2.0'
-    implementation "com.trello.rxlifecycle2:rxlifecycle:$rxLifecycle"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-android:$rxLifecycle"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-navi:$rxLifecycle"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxLifecycle"
+    // Redux (State Management)
+    implementation "com.github.pardom:redux-kotlin:$rootProject.ext.redux"
+    implementation "com.github.pardom:redux-logger-kotlin:$rootProject.ext.reduxExtra"
+    implementation "com.github.pardom.redux-rxjava:redux-rxjava2:$rootProject.ext.reduxExtra"
 
     // UI
-    implementation('com.mikepenz:aboutlibraries:6.0.1@aar') { transitive = true }
-    implementation 'com.github.Ilhasoft:data-binding-validator:0.6.4'
-    implementation 'com.github.d-max:spots-dialog:0.7@aar'
-    implementation 'com.braintreepayments:card-form:3.0.5'
+    implementation "com.github.d-max:spots-dialog:0.7@aar"
+    implementation "com.braintreepayments:card-form:3.0.5"
+    implementation("com.mikepenz:aboutlibraries:6.0.1@aar") { transitive true }
+
+    // RxJava (Async & Threading)
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxkotlin"
+    implementation "com.patloew.rxlocation:rxlocation:1.0.3"
+    implementation "com.github.raviteja06:RxPermissions:1.2.0"
+    implementation "com.github.miguelbcr:RxPaparazzo:0.6.0-2.x"
+    implementation "com.jakewharton.rxbinding2:rxbinding-design:2.0.0"
+    implementation "com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC3"
 
     // Unit Tests
-    //testImplementation 'junit:junit:4.12'
-    //testImplementation 'org.mockito:mockito-core:1.10.19'
-    //testImplementation 'org.robolectric:robolectric:3.4.2'
-    //testImplementation 'org.robolectric:shadows-support-v4:3.0'
+    testImplementation "junit:junit:$rootProject.ext.junit"
+    testImplementation "org.mockito:mockito-core:1.10.19"
+    testImplementation "org.robolectric:robolectric:$rootProject.ext.roboElectric"
+    testImplementation "org.robolectric:shadows-support-v4:3.0"
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:2.2.2") {
+        exclude group: "com.android.support", module: "support-annotations"
+    }
 
 }
+
