@@ -1,10 +1,12 @@
 package com.wiscosoft.ridefree.core
 
+import android.content.Context
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import com.wiscosoft.ridefree.R
 import com.wiscosoft.ridefree.R.anim.slide_from_left
 import com.wiscosoft.ridefree.R.anim.slide_to_left
@@ -60,9 +62,9 @@ fun Fragment.goTo(fragment: Fragment) = (activity as? AppCompatActivity)?.goTo(f
  * Fragment
  */
 
-fun Fragment.hideKeyboard() = {
-  // TODO()
-  //(activity as AppCompatActivity).inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+fun Fragment.hideKeyboard() {
+  (context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+    .hideSoftInputFromWindow(view?.windowToken, InputMethodManager.SHOW_FORCED)
 }
 
 fun Fragment.showMessage(msg: String) {

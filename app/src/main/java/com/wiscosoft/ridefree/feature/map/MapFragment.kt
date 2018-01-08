@@ -18,7 +18,7 @@ import com.wiscosoft.ridefree.core.setThreads
 import com.wiscosoft.ridefree.core.showError
 import com.wiscosoft.ridefree.databinding.FragmentMapBinding
 import com.wiscosoft.ridefree.provider.gps.Gps
-import com.wiscosoft.ridefree.provider.gps.Position
+import com.wiscosoft.ridefree.provider.gps.Pos
 import com.wiscosoft.ridefree.provider.redux.State
 import io.reactivex.Flowable
 import redux.api.Store
@@ -73,12 +73,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>() {
 //    }
   }
 
-//  private fun onPlaceSelected(position: Position) {
-//    userPin = position.toLatLn()
+//  private fun onPlaceSelected(pos: Pos) {
+//    userPin = pos.toLatLn()
 //
 //    map.addMarker(
 //      MarkerOptions()
-//        .position(userPin)
+//        .pos(userPin)
 //        .title("Marker in Home")
 //    )
 //
@@ -97,8 +97,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>() {
 //    )
 //  }
 
-  private fun updateCamera(position: Position) {
-    val latLng = LatLng(position.lat, position.lon)
+  private fun updateCamera(pos: Pos) {
+    val latLng = LatLng(pos.lat, pos.lon)
     map.moveCamera(CameraUpdateFactory.newLatLng(latLng))
   }
 
@@ -121,9 +121,9 @@ class MapVM(gps: Gps, store: Store<State>) {
   val checkGps: Flowable<Boolean> =
     gps.settings.setThreads()
 
-  val locUpdates: Flowable<Position> =
+  val locUpdates: Flowable<Pos> =
     store.asObservable()
-      .map(State::position)
+      .map(State::pos)
       .flowable
       .setThreads()
 

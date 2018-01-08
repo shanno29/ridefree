@@ -1,7 +1,7 @@
 package com.wiscosoft.ridefree.domain.ride
 
 import android.arch.persistence.room.Entity
-import com.wiscosoft.ridefree.domain.ride.status.Status
+import com.wiscosoft.ridefree.domain.status.Status
 import java.util.Date
 
 @Entity(primaryKeys = ["id"])
@@ -9,8 +9,8 @@ data class Ride(
   val id: Int,
   val driver: Int,
   val status: Status,
-  val dateSubmitted: Date?,
-  val dateComplete: Date?,
+  val dateSubmitted: Date,
+  val dateCompleted: Date,
   val username: String,
   val pickup: String,
   val currentAddress: String,
@@ -18,6 +18,9 @@ data class Ride(
   val notes: String
 ) {
   companion object {
-    val default = Ride(0, 0, Status.UNKNOWN, null, null, "", "", "", "", "")
+    val DEFAULT = Ride(0, 0, Status.UNKNOWN, Date(0), Date(0), "", "", "", "", "")
   }
+
 }
+
+

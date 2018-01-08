@@ -32,7 +32,7 @@ class NotificationService : BaseService() {
 
   private fun locationUpdates() {
     sub.add(gps.location.subscribe(
-      { store.dispatch(Action.LocUpdate(it)) },
+      { store.dispatch(Action.LocUpdate(it.lat, it.lon)) },
       { log(it.localizedMessage) }
     ))
   }

@@ -11,7 +11,7 @@ import com.wiscosoft.ridefree.core.setThreads
 import com.wiscosoft.ridefree.core.showError
 import com.wiscosoft.ridefree.databinding.FragmentListBinding
 import com.wiscosoft.ridefree.domain.user.User
-import com.wiscosoft.ridefree.domain.user.api.UserApi
+import com.wiscosoft.ridefree.provider.api.entity.user.UserApi
 import com.wiscosoft.ridefree.provider.prefs.Prefs
 import com.wiscosoft.ridefree.provider.redux.State
 import io.reactivex.Flowable

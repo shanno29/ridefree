@@ -74,6 +74,7 @@ android {
 
         release {
             minifyEnabled true
+            testCoverageEnabled false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
@@ -84,31 +85,38 @@ android {
         jacocoVersion = '0.7.2.201409121644'
         includeNoLocationClasses = true
         excludes = [
-            '**/*_*.*',
-            '**/*BR*.*',
-            '**/R.class',
-            '**/*_Impl*.*',
-            '**/R$*.class',
-            '**/*Module*.*',
-            '**/Manifest*.*',
-            'android/**/*.*',
-            '**/*AjcClosure*',
-            '**/Lambda.class',
-            '**/BuildConfig.*',
-            '**/*_*Factory*.*',
-            '**/*Component*.*',
-            '**/AutoValue_*.*',
-            '**/*Lambda.class',
-            '**/Lambda$*.class',
-            '**/*Lambda*.class',
-            '**/*$ViewBinder*.*',
-            '**/*$ViewInjector*.*',
-            '**/*_MembersInjector*.*',
-            '**/*$InjectAdapter.class',
-            '**/*$ModuleAdapter.class',
-            '**/*$ViewInjector*.class',
-            '**/*_MembersInjector.class',
-            '**/*JavascriptBridge.class',
+                '**/R.class',
+                '**/R$*.class',
+                '**/*_$*.*',
+                '**/BuildConfig.*',
+                '**/Manifest*.*',
+                '**/*$ViewInjector*.*',
+                '**/*$ViewBinder*.*',
+                '**/*$Lambda$*.*',
+                '**/*_Imp*.*',
+                '**/*BR*.*',
+                '**/*_Provide*Factory*.*',
+                '**/*$*$*.*',
+                'android/**/*.*',
+                '**/databinding.*',
+                '**/*Binding*.*',
+                //'**/*ModuleKt*.*', // might keep idk yet
+                'android/databinding/**/*.class',
+                '**/android/databinding/*Binding.class',
+                '**/databinding',
+                'com/**/*.*',
+                'uk/**/*.*',
+                'io/**/*.*',
+                'component*.*',
+                'androidTest/**/*.*',
+                'test/**/*.*',
+                '**/injector/**/*.*',
+                '**/model/**/*.*',
+                '**/mock/**/*.*',
+                '**/event/**/*.*',
+                '**/**_ViewBinding**',
+                '**/*EventType.*',
+                '**/**Mocked'
         ]
     }
 
@@ -117,7 +125,6 @@ android {
         returnDefaultValues true
         all { testLogging.events 'passed', 'skipped', 'failed', 'standardOut', 'standardError' }
     }
-
 }
 
 dependencies {
@@ -173,9 +180,9 @@ dependencies {
 
     // Unit Tests
     testImplementation "junit:junit:$rootProject.ext.junit"
-    testImplementation "org.mockito:mockito-core:1.10.19"
-    testImplementation "org.robolectric:robolectric:$rootProject.ext.roboElectric"
-    testImplementation "org.robolectric:shadows-support-v4:3.0"
+    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockito"
+    testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+
 
     androidTestImplementation("com.android.support.test.espresso:espresso-core:2.2.2") {
         exclude group: "com.android.support", module: "support-annotations"

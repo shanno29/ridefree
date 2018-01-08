@@ -11,6 +11,6 @@ data class Payment(
   val phoneNumber: String
 ) {
   companion object {
-    val default = Payment(0, "", "", "", "")
+    val DEFAULT = Payment(0, "", "", "", "")
   }
 }

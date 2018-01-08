@@ -16,7 +16,7 @@ val permissionsModule = Kodein.Module {
   bind<Permissions>() with singleton {
     val permObs: PermissionObservable = instance()
     val context: Context = instance()
-    PermissionsImp(permObs, context)
+    PermissionsImpl(permObs, context)
   }
 
 }

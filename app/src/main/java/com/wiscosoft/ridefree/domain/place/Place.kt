@@ -10,7 +10,7 @@ data class Place(
   val imageUrl: String
 ) {
   companion object {
-    val default = Place(0, "", "", "")
+    val DEFAULT = Place(0, "", "", "")
   }
 }
 

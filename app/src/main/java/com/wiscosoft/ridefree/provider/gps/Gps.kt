@@ -9,7 +9,7 @@ interface Gps {
 
   val settings: Flowable<Boolean>
 
-  val location: Flowable<Position>
+  val location: Flowable<Pos>
 
-  fun location(query: String): Flowable<Position>
+  fun location(query: String): Flowable<Pos>
 }

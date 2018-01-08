@@ -16,7 +16,7 @@ import com.wiscosoft.ridefree.core.base.BaseActivity
 import com.wiscosoft.ridefree.core.base.Config
 import com.wiscosoft.ridefree.core.goTo
 import com.wiscosoft.ridefree.databinding.ActivityMainBinding
-import com.wiscosoft.ridefree.domain.user.api.UserApi
+import com.wiscosoft.ridefree.provider.api.entity.user.UserApi
 import com.wiscosoft.ridefree.provider.redux.State
 import com.wiscosoft.ridefree.provider.router.Router
 import redux.api.Store

@@ -1,24 +1,11 @@
 package com.wiscosoft.ridefree.feature.login
 
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.singleton
 import com.wiscosoft.ridefree.R
 import com.wiscosoft.ridefree.core.base.BaseFragment
 import com.wiscosoft.ridefree.core.base.Config
-import com.wiscosoft.ridefree.core.setThreads
 import com.wiscosoft.ridefree.databinding.FragmentLoginBinding
-import com.wiscosoft.ridefree.domain.user.User
-import com.wiscosoft.ridefree.domain.user.api.UserApi
-import com.wiscosoft.ridefree.provider.redux.Action
-import com.wiscosoft.ridefree.provider.redux.State
 import com.wiscosoft.ridefree.provider.router.Router
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
-import redux.api.Store
-import redux.asObservable
-import retrofit2.HttpException
 
 @Config("Login", R.layout.fragment_login)
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
@@ -67,41 +54,3 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
   }
 }
 
-// VIEW MODEL
-class LoginVM(private val userApi: UserApi, private val store: Store<State>) {
-
-  fun userUpdate(): Flowable<User> = store.asObservable().toFlowable(BackpressureStrategy.LATEST).map { it.user }.setThreads()
-
-  fun login(user: User?): Flowable<User> {
-    return userApi.logon(user ?: store.state.user)
-      .doOnNext {
-        store.dispatch(Action.AuthUpdate(true))
-        //store.dispatch(Action.UserUpdate(it))
-      }
-      .setThreads()
-  }
-
-  fun getReason(error: Throwable): String {
-    if (error !is HttpException) return error.localizedMessage
-    return when (error.code()) {
-      414 -> "Too Many Clients"
-      401 -> "Username / Password Incorrect"
-      501 -> "Oops Something Went Wrong, Try Again Later"
-      else -> "Unidentified Error: "
-    }
-  }
-}
-
-val loginModule = Kodein.Module {
-
-  bind<LoginVM>() with singleton {
-    val userApi: UserApi = instance()
-    val store: Store<State> = instance()
-    LoginVM(userApi, store)
-  }
-
-  bind<LoginFragment>() with singleton {
-    LoginFragment()
-  }
-
-}

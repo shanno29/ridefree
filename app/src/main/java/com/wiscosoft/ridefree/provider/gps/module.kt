@@ -18,11 +18,9 @@ val gpsModule = Kodein.Module {
   }
 
   bind<LocationRequest>() with singleton {
-    val priority = PRIORITY_LOW_POWER
-    val interval: Long = 10 * 10000
     LocationRequest.create()
-      .setPriority(priority)
-      .setInterval(interval)
+      .setPriority(PRIORITY_LOW_POWER)
+      .setInterval(10 * 10000)
   }
 
   bind<GoogleApiAvailability>() with singleton {
@@ -33,7 +31,7 @@ val gpsModule = Kodein.Module {
     val google: GoogleApiAvailability = instance()
     val request: LocationRequest = instance()
     val rxLocation: RxLocation = instance()
-    GpsImp(rxLocation, request, google)
+    GpsImpl(rxLocation, request, google)
   }
 
 }

@@ -12,7 +12,7 @@ import com.wiscosoft.ridefree.core.setThreads
 import com.wiscosoft.ridefree.core.showMessage
 import com.wiscosoft.ridefree.databinding.FragmentLogoutBinding
 import com.wiscosoft.ridefree.domain.user.User
-import com.wiscosoft.ridefree.domain.user.api.UserApi
+import com.wiscosoft.ridefree.provider.api.entity.user.UserApi
 import com.wiscosoft.ridefree.provider.redux.State
 import com.wiscosoft.ridefree.provider.router.Router
 import io.reactivex.Flowable

@@ -12,6 +12,6 @@ val pushModule = Kodein.Module {
   bind<Push>() with singleton {
     val okHttpClient: OkHttpClient = instance()
     val gson: Gson = instance()
-    PushImp(okHttpClient, gson)
+    PushImpl(okHttpClient, gson)
   }
 }

@@ -13,7 +13,7 @@ data class User(
   val payments: List<Int>
 ) {
   companion object {
-    val default = User(0, "", "", "", emptyList(), emptyList(), emptyList())
+    val DEFAULT = User(0, "", "", "", emptyList(), emptyList(), emptyList())
   }
 }
 

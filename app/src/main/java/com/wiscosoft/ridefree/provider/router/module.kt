@@ -6,6 +6,6 @@ import com.github.salomonbrys.kodein.singleton
 
 val routerModule = Kodein.Module {
   bind<Router>() with singleton {
-    RouterImp()
+    RouterImpl()
   }
 }

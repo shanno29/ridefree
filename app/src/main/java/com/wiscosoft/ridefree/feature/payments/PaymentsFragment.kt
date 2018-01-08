@@ -11,7 +11,7 @@
 //import com.wiscosoft.ridefree.R.layout.fragment_list
 //import com.wiscosoft.ridefree.R.layout.fragment_payment_add
 //import com.wiscosoft.ridefree.domain.payment.Payment
-//import com.wiscosoft.ridefree.domain.payment.api.PaymentApi
+//import com.wiscosoft.ridefree.provider.api.entity.payment.PaymentApi
 //import com.wiscosoft.ridefree.core.base.BaseFragment
 //import com.wiscosoft.ridefree.provider.router.Router
 //import com.wiscosoft.ridefree.core.setThreads

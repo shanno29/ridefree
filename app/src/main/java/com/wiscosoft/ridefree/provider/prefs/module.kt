@@ -23,7 +23,7 @@ val prefsModule = Kodein.Module {
 
   bind<Prefs>() with singleton {
     val rxPrefs: RxSharedPreferences = instance()
-    PrefsImp(rxPrefs)
+    PrefsImpl(rxPrefs)
   }
 
 }

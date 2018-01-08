@@ -42,13 +42,3 @@ abstract class BaseFragment<Binding : ViewDataBinding> : Fragment(), SupportFrag
     super.onDestroyView()
   }
 }
-
-//setupFab()
-
-// private fun setupFab() {
-//    if (buttonImg != 0) {
-//      binding.ROOT
-//        .findViewById<FloatingActionButton>(R.id.fab)
-//        .setImageResource(buttonImg)
-//    }
-//  }

@@ -9,7 +9,6 @@ import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.lazy
 import com.github.salomonbrys.kodein.singleton
 import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
-import com.wiscosoft.ridefree.domain.domainModule
 import com.wiscosoft.ridefree.feature.featureModule
 import com.wiscosoft.ridefree.provider.providerModule
 import java.io.File
@@ -17,7 +16,6 @@ import java.io.File
 class App : Application(), KodeinAware {
 
   override val kodein by Kodein.lazy {
-    import(domainModule)
     import(providerModule)
     import(featureModule)
 

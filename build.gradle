@@ -21,7 +21,7 @@ ext {
 
     junit = "4.12"
     jacoco = "0.10.0"
-    roboElectric = "3.4.2"
+    mockito = "2.8.47"
 }
 
 buildscript {
@@ -51,13 +51,7 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-
-
-
+task clean(type: Delete) { delete rootProject.buildDir }
 
 //tasks.whenTaskAdded {
 //    task -> if (task.name == "lint") {
