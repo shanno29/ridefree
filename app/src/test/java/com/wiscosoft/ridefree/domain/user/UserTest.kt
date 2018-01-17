@@ -1,9 +1,11 @@
 package com.wiscosoft.ridefree.domain.user
 
-import org.junit.Assert.*
+import com.wiscosoft.ridefree.core.test.BaseTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class UserTest {
+class UserTest : BaseTest() {
 
   @Test
   fun testDefault() {
@@ -13,7 +15,7 @@ class UserTest {
     assertEquals("", default.userName)
     assertEquals("", default.passWord)
     assertEquals(emptyList<Int>(), default.rides)
-    assertEquals(emptyList<String>() ,default.type)
+    assertEquals(emptyList<String>(), default.type)
     assertEquals(emptyList<Int>(), default.payments)
   }
 
@@ -36,10 +38,7 @@ class UserTest {
     val default = User.DEFAULT
     val clone = default.copy(id = 1)
 
-    assertFalse(default.equals(clone))
-    assertNotEquals(default.id, clone.id)
-    assertNotEquals(default.toString(), clone.toString())
-    assertNotEquals(default.hashCode(), clone.hashCode())
+    assertTrue(cloneHelper(default, clone))
   }
 
 }

@@ -1,35 +1,42 @@
 package com.wiscosoft.ridefree.core.base
 
-import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.android.ServiceInjector
+import com.wiscosoft.ridefree.core.app.debugLog
 import io.reactivex.disposables.CompositeDisposable
+import dagger.android.DaggerService
 
-abstract class BaseService : Service(), ServiceInjector {
+abstract class BaseService : DaggerService() {
 
-  internal val sub: CompositeDisposable = CompositeDisposable()
-  override val injector: KodeinInjector = KodeinInjector()
-  abstract fun onReady()
+  val sub = CompositeDisposable()
 
   override fun onCreate() {
+    debugLog("onCreate")
     super.onCreate()
-    initializeInjector()
   }
 
-  override fun onDestroy() {
-    sub.clear()
-    destroyInjector()
-    super.onDestroy()
-  }
-
-  override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+  override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int  {
+    debugLog("onStartCommand")
     onReady()
     return START_STICKY
   }
 
-  override fun onBind(intent: Intent): IBinder? {
+  open fun onReady() {
+    debugLog("onReady")
+  }
+
+  override fun onDestroy() {
+    debugLog("onDestroy")
+    sub.clear()
+    super.onDestroy()
+  }
+
+  override fun onBind(intent: Intent?): IBinder? {
+    debugLog("onBind")
     return null
   }
+
 }
+
+
+

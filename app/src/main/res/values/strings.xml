@@ -12,7 +12,10 @@
   <string name="register">Register</string>
   <string name="login">Login</string>
   <string name="logout">Logout</string>
+  <string name="enter_email">Enter Email</string>
   <string name="enter_password">Enter Password</string>
+  <string name="enter_username">Enter Username</string>
+
   <string name="username">Username</string>
   <string name="email">Email</string>
   <string name="password">Password</string>

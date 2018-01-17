@@ -2,13 +2,14 @@ package com.wiscosoft.ridefree.provider.push
 
 interface Push {
 
-  fun setup()
+  val setup: () -> Unit
 
-  fun openSocket()
+  val openSocket: () -> Unit
 
-  fun writeToSocket(text: String)
+  val writeToSocket: (String) -> Unit
 
-  fun readFromSocket(callback: (Event) -> Unit)
+  val readFromSocket: ((Event) -> Unit) -> Unit
 
-  fun closeSocket()
+  val closeSocket: () -> Unit
+
 }

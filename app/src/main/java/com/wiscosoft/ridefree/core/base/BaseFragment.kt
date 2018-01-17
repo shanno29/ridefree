@@ -3,42 +3,47 @@ package com.wiscosoft.ridefree.core.base
 import android.databinding.DataBindingUtil.inflate
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.android.SupportFragmentInjector
+import com.wiscosoft.ridefree.core.app.debugLog
+import dagger.android.support.DaggerFragment
 import dmax.dialog.SpotsDialog
 import io.reactivex.disposables.CompositeDisposable
+import kotlin.properties.Delegates
 
-abstract class BaseFragment<Binding : ViewDataBinding> : Fragment(), SupportFragmentInjector {
+abstract class BaseFragment<Binding : ViewDataBinding> : DaggerFragment() {
 
-  internal val config = javaClass.getAnnotation(Config::class.java)
-  internal val loadingUI: SpotsDialog by lazy { SpotsDialog(context, "") }
-  internal val sub = CompositeDisposable()
-  override val injector = KodeinInjector()
-  lateinit var binding: Binding
-
-  abstract fun onReady()
+  val layout: Layout = javaClass.getAnnotation(Layout::class.java)
+  val title: Title = javaClass.getAnnotation(Title::class.java)
+  val loadingUI by lazy { SpotsDialog(context) }
+  var binding: Binding by Delegates.notNull()
+  val sub = CompositeDisposable()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, bundle: Bundle?): View? {
+    debugLog("onCreate")
     super.onCreateView(inflater, container, bundle)
-    binding = inflate(layoutInflater, config.layout, null, false)!!
-    activity?.title = config.title
-    initializeInjector()
+    binding = inflate(inflater, layout.res, container, false)
+    activity.title = title.text
     return binding.root
   }
 
   override fun onStart() {
+    debugLog("onStart")
     super.onStart()
     onReady()
   }
 
-  override fun onDestroyView() {
-    sub.clear()
-    destroyInjector()
-    loadingUI.dismiss()
-    super.onDestroyView()
+  open fun onReady() {
+    debugLog("onReady")
   }
+
+  override fun onDestroy() {
+    debugLog("onDestroy")
+    sub.clear()
+    binding.unbind()
+    super.onDestroy()
+  }
+
 }
+

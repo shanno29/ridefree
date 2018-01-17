@@ -4,31 +4,31 @@ import android.annotation.SuppressLint
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.RxLocation
-import com.wiscosoft.ridefree.core.flowable
-import io.reactivex.Flowable
+import io.reactivex.Observable
 
-@SuppressLint("MissingPermission")
-class GpsImpl(private val rxLoc: RxLocation, request: LocationRequest, google: GoogleApiAvailability) : Gps {
+class GpsImpl(rxLoc: RxLocation, request: LocationRequest, google: GoogleApiAvailability) : Gps {
 
-  override val googleApi: Flowable<GoogleApiAvailability> =
-    Flowable
+  override val googleApi: Observable<GoogleApiAvailability> =
+    Observable
       .just(google)
 
-  override val settings: Flowable<Boolean> =
+  override val settings: Observable<Boolean>  =
     rxLoc.settings()
       .checkAndHandleResolution(request)
-      .flowable
+      .toObservable()
 
-  override val location: Flowable<Pos> =
+  @SuppressLint("MissingPermission")
+  override val location: Observable<Loc> =
     rxLoc.location()
       .updates(request)
-      .map(Pos.Companion::fromLocation)
-      .flowable
+      .map(Loc.Companion::fromLocation)
 
-  override fun location(query: String): Flowable<Pos> =
+  override val locationFrom: (String) -> Observable<Loc> = {
     rxLoc.geocoding()
-      .fromLocationName(query)
-      .map(Pos.Companion::fromAddress)
-      .flowable
+      .fromLocationName(it)
+      .map(Loc.Companion::fromAddress)
+      .toObservable()
+  }
+
 
 }

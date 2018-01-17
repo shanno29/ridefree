@@ -2,7 +2,7 @@
 # RideFree Android
 
 #####JAVA ~ app/src/main/java/com/wiscosoft/ridefree
-#####XML  ~ app/src/main/res/layout 
+#####XML  ~ app/src/main/res/layout
 #####SQL ~ app/schemas
 ####App Architecture
 - [Android Arch](http://github.com/googlesamples/android-architecture)

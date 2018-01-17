@@ -1,9 +1,11 @@
 package com.wiscosoft.ridefree.domain.payment
 
-import org.junit.Assert.*
+import com.wiscosoft.ridefree.core.test.BaseTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class PaymentTest {
+class PaymentTest : BaseTest() {
 
   @Test
   fun testDefault() {
@@ -31,22 +33,9 @@ class PaymentTest {
   @Test
   fun testClone() {
     val default = Payment.DEFAULT
-    val clone = default.copy(
-      id = 1,
-      cCNumber = "A",
-      cVV2Number = "B",
-      cCExpiration = "C",
-      phoneNumber = "D"
-    )
+    val clone = default.copy(id = 1)
 
-    assertFalse(default == clone)
-    assertNotEquals(default.id, clone.id)
-    assertNotEquals(default.cCNumber, clone.cCNumber)
-    assertNotEquals(default.cVV2Number, clone.cVV2Number)
-    assertNotEquals(default.cCExpiration, clone.cCExpiration)
-    assertNotEquals(default.phoneNumber, clone.phoneNumber)
-    assertNotEquals(default.toString(), clone.toString())
-    assertNotEquals(default.hashCode(), clone.hashCode())
+    assertTrue(cloneHelper(default, clone))
   }
-  
+
 }

@@ -2,7 +2,7 @@ package com.wiscosoft.ridefree.domain.payment
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
-import com.wiscosoft.ridefree.core.base.BaseDao
+import com.wiscosoft.ridefree.provider.storage.BaseDao
 import io.reactivex.Flowable
 
 @Dao

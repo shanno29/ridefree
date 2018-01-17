@@ -1,9 +1,11 @@
 package com.wiscosoft.ridefree.provider.push
 
-import org.junit.Assert.*
+import com.wiscosoft.ridefree.core.test.BaseTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class EventTest {
+class EventTest : BaseTest() {
 
   @Test
   fun testDefault() {
@@ -27,10 +29,7 @@ class EventTest {
     val default = Event.DEFAULT
     val clone = default.copy(statusCode = 1)
 
-    assertFalse(default.equals(clone))
-    assertNotEquals(default.statusCode, clone.statusCode)
-    assertNotEquals(default.toString(), clone.toString())
-    assertNotEquals(default.hashCode(), clone.hashCode())
+    assertTrue(cloneHelper(default, clone))
   }
 
 }

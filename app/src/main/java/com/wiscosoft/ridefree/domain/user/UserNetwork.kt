@@ -1,6 +1,6 @@
 package com.wiscosoft.ridefree.domain.user
 
-import io.reactivex.Flowable
+import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -8,14 +8,14 @@ import retrofit2.http.POST
 interface UserNetwork {
 
   @POST("ACCOUNT/CHANGE")
-  fun modify(@Body user: User): Flowable<User>
+  fun modify(@Body user: User): Observable<User>
 
   @POST("ACCOUNT/REGISTER")
-  fun register(@Body user: User): Flowable<User>
+  fun register(@Body user: User): Observable<User>
 
   @POST("ACCOUNT/LOGON")
-  fun logon(@Body user: User): Flowable<User>
+  fun logon(@Body user: User): Observable<User>
 
   @POST("ACCOUNT/LOGOFF")
-  fun logoff(@Body user: User): Flowable<User>
+  fun logoff(@Body user: User): Observable<User>
 }

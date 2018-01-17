@@ -1,15 +1,15 @@
 package com.wiscosoft.ridefree.provider.gps
 
 import com.google.android.gms.common.GoogleApiAvailability
-import io.reactivex.Flowable
+import io.reactivex.Observable
 
 interface Gps {
 
-  val googleApi: Flowable<GoogleApiAvailability>
+  val googleApi: Observable<GoogleApiAvailability>
 
-  val settings: Flowable<Boolean>
+  val settings: Observable<Boolean>
 
-  val location: Flowable<Pos>
+  val location: Observable<Loc>
 
-  fun location(query: String): Flowable<Pos>
+  val locationFrom: (String) -> Observable<Loc>
 }

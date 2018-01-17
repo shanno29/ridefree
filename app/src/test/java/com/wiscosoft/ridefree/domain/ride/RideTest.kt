@@ -1,11 +1,13 @@
 package com.wiscosoft.ridefree.domain.ride
 
+import com.wiscosoft.ridefree.core.test.BaseTest
 import com.wiscosoft.ridefree.domain.status.Status
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.Date
 
-class RideTest {
+class RideTest : BaseTest() {
 
   @Test
   fun testDefault() {
@@ -45,10 +47,7 @@ class RideTest {
     val default = Ride.DEFAULT
     val clone = default.copy(id = 1)
 
-    assertFalse(default.equals(clone))
-    assertNotEquals(default.id, clone.id)
-    assertNotEquals(default.toString(), clone.toString())
-    assertNotEquals(default.hashCode(), clone.hashCode())
+    assertTrue(cloneHelper(default, clone))
   }
 
 }

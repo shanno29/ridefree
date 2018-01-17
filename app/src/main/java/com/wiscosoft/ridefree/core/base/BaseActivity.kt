@@ -1,78 +1,51 @@
 package com.wiscosoft.ridefree.core.base
 
-import android.databinding.DataBindingUtil.setContentView
+import android.databinding.DataBindingUtil.*
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.github.salomonbrys.kodein.KodeinInjector
-import com.github.salomonbrys.kodein.android.AppCompatActivityInjector
-import io.reactivex.Flowable.fromIterable
+import com.wiscosoft.ridefree.core.app.debugLog
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
+import kotlin.properties.Delegates
 
-abstract class BaseActivity<Binding : ViewDataBinding> : AppCompatActivity(), AppCompatActivityInjector {
+abstract class BaseActivity<Binding : ViewDataBinding> : DaggerAppCompatActivity() {
 
-  private val config = javaClass.getAnnotation(Config::class.java)
-  override val injector = KodeinInjector()
-  internal val sub = CompositeDisposable()
-  lateinit var binding: Binding
-  abstract fun onReady()
+  val layout: Layout = javaClass.getAnnotation(Layout::class.java)
+  var binding: Binding by Delegates.notNull()
+  val sub = CompositeDisposable()
 
   override fun onCreate(bundle: Bundle?) {
+    debugLog("onCreate")
     super.onCreate(bundle)
-    binding = setContentView(this, config.layout)!!
-    initializeInjector()
-    toolbarUpdates()
-  }
-
-  private fun toolbarUpdates() {
-    supportFragmentManager.addOnBackStackChangedListener {
-      sub.add(fromIterable(supportFragmentManager.fragments)
-        .lastElement()
-        .cast(BaseFragment::class.java)
-        .map { it.config.title }
-        .subscribe(this::setTitle)
-      )
-    }
+    binding = setContentView(this, layout.res)
   }
 
   override fun onStart() {
+    debugLog("onStart")
     super.onStart()
     onReady()
   }
 
-  override fun onDestroy() {
+  open fun onReady() {
+    debugLog("onReady")
+  }
+
+  public override fun onDestroy() {
+    debugLog("onDestroy")
     sub.clear()
-    destroyInjector()
+    binding.unbind()
     super.onDestroy()
   }
 
-//  fun changeFragment(f: Fragment, cleanStack: Boolean = false) {
-//    val ft = supportFragmentManager.beginTransaction()
-//    cleanStack.let { clearBackStack() }
-//    if (cleanStack) { clearBackStack() }
-//    ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit)
-//    ft.replace(R.id.activity_base_content, f)
-//    ft.addToBackStack(null)
-//    ft.commit()
-//  }
-//
-//  fun clearBackStack() {
-//    val manager = supportFragmentManager
-//    if (manager.backStackEntryCount > 0) {
-//      val first = manager.getBackStackEntryAt(0)
-//      manager.popBackStack(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-//    }
-//  }
-
-  override fun onBackPressed() {
-    val fragmentManager = supportFragmentManager
-    if (fragmentManager.backStackEntryCount > 1)
-      fragmentManager.popBackStack()
-    else
-      finish()
+  fun titleUpdates() {
+    debugLog("titleUpdates")
+    sub.add(backStackUpdates()
+      .filter { it is BaseFragment<*> }
+      .cast(BaseFragment::class.java)
+      .map { it.title.text }
+      .subscribe(this::setTitle)
+    )
   }
 
-
 }
-
 

@@ -1,11 +1,12 @@
 package com.wiscosoft.ridefree.provider.permissions
 
 import com.apt7.rxpermissions.Permission
-import io.reactivex.Flowable
+import io.reactivex.Observable
 
 interface Permissions {
 
-  fun check(vararg items: String): Flowable<Permission>
+  val check: (Array<String>) -> Observable<Permission>
 
-  fun request(vararg items: String): Flowable<Permission>
+  val request: (Array<String>) -> Observable<Permission>
+
 }

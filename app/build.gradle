@@ -1,20 +1,19 @@
 apply plugin: "com.android.application"
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: "com.vanniktech.android.junit.jacoco"
 
-kapt.correctErrorTypes true
-
 android {
-    buildToolsVersion rootProject.ext.buildTools
     compileSdkVersion rootProject.ext.maxSdk
+    kapt.correctErrorTypes true
     dataBinding.enabled true
 
     defaultConfig {
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         targetSdkVersion rootProject.ext.maxSdk
         minSdkVersion rootProject.ext.minSdk
         applicationId rootProject.ext.appName
+        multiDexEnabled true
         versionCode 1000
         versionName "1"
         resConfigs "en"
@@ -66,6 +65,7 @@ android {
         debug {
             debuggable true
             minifyEnabled false
+            //useProguard true
             versionNameSuffix "Debug"
             testCoverageEnabled true
             signingConfig signingConfigs.debug
@@ -85,46 +85,50 @@ android {
         jacocoVersion = '0.7.2.201409121644'
         includeNoLocationClasses = true
         excludes = [
-                '**/R.class',
-                '**/R$*.class',
-                '**/*_$*.*',
-                '**/BuildConfig.*',
-                '**/Manifest*.*',
-                '**/*$ViewInjector*.*',
-                '**/*$ViewBinder*.*',
-                '**/*$Lambda$*.*',
-                '**/*_Imp*.*',
-                '**/*BR*.*',
-                '**/*_Provide*Factory*.*',
-                '**/*$*$*.*',
-                'android/**/*.*',
-                '**/databinding.*',
-                '**/*Binding*.*',
-                //'**/*ModuleKt*.*', // might keep idk yet
-                'android/databinding/**/*.class',
-                '**/android/databinding/*Binding.class',
-                '**/databinding',
-                'com/**/*.*',
-                'uk/**/*.*',
-                'io/**/*.*',
-                'component*.*',
-                'androidTest/**/*.*',
-                'test/**/*.*',
-                '**/injector/**/*.*',
-                '**/model/**/*.*',
-                '**/mock/**/*.*',
-                '**/event/**/*.*',
-                '**/**_ViewBinding**',
-                '**/*EventType.*',
-                '**/**Mocked'
+            '**/*Test*.*',
+            '**/AutoValue_*.*',
+            '**/*_Impl*.*',
+            '**/*_*.*',
+            '**/*AjcClosure*',
+            '**/*JavascriptBridge.class',
+            'android/**/*.*',
+            '**/*$InjectAdapter.class',
+            '**/*$ModuleAdapter.class',
+            '**/*$ViewInjector*.class',
+            '**/*dataBinding/*.*',
+            '**/com/wiscosoft/ridefree/databinding/*',
+            '**/android/databinding/*',
+            '**/*_MembersInjector*.*',
+            '**/*BR*.*',
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*$Lambda$*.*',
+            '**/Lambda$*.class',
+            '**/Lambda.class',
+            '**/*Lambda.class',
+            '**/*Lambda*.class',
+            '**/*Module.*',
+            '**/*Component*.*',
+            '**/*Dagger*.*',
+            '**/*MembersInjector*.*',
+            '**/*_Provide*Factory*.*',
+            '**/*_Factory.*',
+            '**/*$*$*.*',
+            '**/Epoxy*',
+            '**/*equals(Object)*'
         ]
     }
 
     testOptions.unitTests {
-        includeAndroidResources true
-        returnDefaultValues true
+        includeAndroidResources = true
+        returnDefaultValues = true
         all { testLogging.events 'passed', 'skipped', 'failed', 'standardOut', 'standardError' }
     }
+
 }
 
 dependencies {
@@ -145,9 +149,14 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:$rootProject.ext.gsm"
 
     // ROOM (SQL Database)
-    kapt "android.arch.persistence.room:compiler:$rootProject.ext.room"
     implementation "android.arch.persistence.room:runtime:$rootProject.ext.room"
     implementation "android.arch.persistence.room:rxjava2:$rootProject.ext.room"
+    kapt "android.arch.persistence.room:compiler:$rootProject.ext.room"
+
+    // Epoxy (RecyclerView)
+    implementation "com.airbnb.android:epoxy-databinding:$rootProject.ext.epoxy"
+    implementation "com.airbnb.android:epoxy:$rootProject.ext.epoxy"
+    kapt "com.airbnb.android:epoxy-processor:$rootProject.ext.epoxy"
 
     // Retrofit (Networking)
     implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
@@ -155,38 +164,47 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttp"
 
-    // Kodein (Dependency Injection)
-    implementation "com.github.salomonbrys.kodein:kodein:$rootProject.ext.kodein"
-    implementation "com.github.salomonbrys.kodein:kodein-android:$rootProject.ext.kodein"
-
     // Redux (State Management)
     implementation "com.github.pardom:redux-kotlin:$rootProject.ext.redux"
     implementation "com.github.pardom:redux-logger-kotlin:$rootProject.ext.reduxExtra"
     implementation "com.github.pardom.redux-rxjava:redux-rxjava2:$rootProject.ext.reduxExtra"
 
+    // Dagger 2
+    implementation "com.google.dagger:dagger:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
+
+    testImplementation "com.google.dagger:dagger:$rootProject.dagger"
+    testImplementation "com.google.dagger:dagger-android:$rootProject.dagger"
+    testImplementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
+
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+
     // UI
-    implementation "com.github.d-max:spots-dialog:0.7@aar"
-    implementation "com.braintreepayments:card-form:3.0.5"
-    implementation("com.mikepenz:aboutlibraries:6.0.1@aar") { transitive true }
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+    implementation 'com.braintreepayments:card-form:3.0.5'
+    implementation('com.mikepenz:aboutlibraries:6.0.1@aar') { transitive true }
+    implementation 'com.github.Ilhasoft:data-binding-validator:0.6.4'
 
     // RxJava (Async & Threading)
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxkotlin"
-    implementation "com.patloew.rxlocation:rxlocation:1.0.3"
-    implementation "com.github.raviteja06:RxPermissions:1.2.0"
-    implementation "com.github.miguelbcr:RxPaparazzo:0.6.0-2.x"
-    implementation "com.jakewharton.rxbinding2:rxbinding-design:2.0.0"
-    implementation "com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC3"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroid"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJava"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlin"
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    implementation 'com.patloew.rxlocation:rxlocation:1.0.3'
+    implementation 'com.github.raviteja06:RxPermissions:1.2.0'
+    implementation 'com.github.miguelbcr:RxPaparazzo:0.6.0-2.x'
 
     // Unit Tests
     testImplementation "junit:junit:$rootProject.ext.junit"
     testImplementation "org.mockito:mockito-core:$rootProject.ext.mockito"
-    testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectric"
+    testImplementation 'org.robolectric:shadows-support-v4:3.3.2'
 
-
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:2.2.2") {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2') {
         exclude group: "com.android.support", module: "support-annotations"
     }
-
 }
-

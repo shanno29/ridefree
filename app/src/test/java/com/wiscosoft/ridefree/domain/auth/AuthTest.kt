@@ -1,9 +1,12 @@
 package com.wiscosoft.ridefree.domain.auth
 
-import org.junit.Assert.*
+import com.wiscosoft.ridefree.core.test.BaseTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class AuthTest {
+class AuthTest : BaseTest() {
 
   @Test
   fun testDefault() {
@@ -25,13 +28,7 @@ class AuthTest {
     val default = Auth.DEFAULT
     val clone = default.copy(flag = true)
 
-    //assertFalse(default.equals(null))
-    assertFalse(default.equals(clone))
-
-    assertFalse(default.hashCode().equals(clone.hashCode()))
-    assertNotEquals(default.flag, clone.flag)
-    assertNotEquals(default.toString(), clone.toString())
-    assertNotEquals(default.hashCode(), clone.hashCode())
+    assertTrue(cloneHelper(default, clone))
   }
-  
+
 }

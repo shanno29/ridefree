@@ -1,17 +1,23 @@
 <resources>
 
     <style name="RideFreeTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="android:navigationBarColor">@color/primary_dark</item>
+      <item name="colorPrimary">@color/primary</item>
+      <item name="colorPrimaryDark">@color/primary_dark</item>
+      <item name="colorAccent">@color/accent</item>
+      <item name="android:navigationBarColor">@color/primary_dark</item>
+      <item name="android:displayOptions">disableHome</item>
     </style>
 
-    <style name="TextLabel" parent="TextAppearance.Design.Hint">
-        <item name="android:textSize">20sp</item>
+    <style name="TextLabel">
+        <!--<item name="android:textSize">10sp</item>-->
     </style>
 
-    <style name="CardViewStyle" parent="CardView">
+  <style name="EditTextLayout" parent="TextAppearance.Design.Hint">
+    <item name="android:textSize">20sp</item>
+  </style>
+
+
+  <style name="CardViewStyle" parent="CardView">
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:layout_margin">@dimen/app_margin</item>
         <item name="cardElevation">@dimen/default_elevation</item>
@@ -39,6 +45,12 @@
         <item name="android:gravity">center</item>
         <item name="android:textStyle">normal</item>
     </style>
+
+  <style name="BetterTheme" parent="Theme.AppCompat.NoActionBar">
+    <item name="colorPrimary">@color/primary_dark</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/colorPrimaryDark</item>
+  </style>
 
 
 </resources>

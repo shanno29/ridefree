@@ -10,6 +10,12 @@
 -dontwarn sun.misc.**
 -dontwarn okio.**
 
+
+-keep class android.arch.** { *; }
+
+-keepattributes Signature
+
 -keep public class com.google.android.gms.* { public *; }
+
 -dontwarn com.google.android.gms.**
 

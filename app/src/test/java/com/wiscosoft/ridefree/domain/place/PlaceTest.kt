@@ -1,9 +1,11 @@
 package com.wiscosoft.ridefree.domain.place
 
-import org.junit.Assert.*
+import com.wiscosoft.ridefree.core.test.BaseTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class PlaceTest {
+class PlaceTest : BaseTest() {
 
   @Test
   fun testDefault() {
@@ -25,16 +27,13 @@ class PlaceTest {
     assertEquals(default.info, info)
     assertEquals(default.imageUrl, imageUrl)
   }
-  
+
   @Test
   fun testClone() {
     val default = Place.DEFAULT
     val clone = default.copy(id = 1)
 
-    assertFalse(default.equals(clone))
-    assertNotEquals(default.id, clone.id)
-    assertNotEquals(default.toString(), clone.toString())
-    assertNotEquals(default.hashCode(), clone.hashCode())
+    assertTrue(cloneHelper(default, clone))
   }
 
 }

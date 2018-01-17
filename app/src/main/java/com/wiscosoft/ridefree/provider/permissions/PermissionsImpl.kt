@@ -3,16 +3,16 @@ package com.wiscosoft.ridefree.provider.permissions
 import android.content.Context
 import com.apt7.rxpermissions.Permission
 import com.apt7.rxpermissions.PermissionObservable
-import com.wiscosoft.ridefree.core.flowable
-import io.reactivex.Flowable
+import io.reactivex.Observable
 
-// IMPLEMENTATION
-class PermissionsImpl(private val permObs: PermissionObservable, private val context: Context) : Permissions {
+class PermissionsImpl(helper: PermissionObservable, context: Context) : Permissions {
 
-  override fun check(vararg items: String): Flowable<Permission> =
-    permObs.checkThePermissionStatus(context, *items).flowable
+  override val check: (Array<String>) -> Observable<Permission> = {
+    helper.checkThePermissionStatus(context, *it)
+  }
 
-  override fun request(vararg items: String): Flowable<Permission> =
-    permObs.request(context, *items).flowable
+  override val request: (Array<String>) -> Observable<Permission> = {
+    helper.request(context, *it)
+  }
 
 }

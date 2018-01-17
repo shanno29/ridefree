@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <RelativeLayout
     android:layout_width="match_parent"
@@ -18,10 +19,13 @@
         android:padding="24dp">
 
         <android.support.design.widget.TextInputLayout
+          style="@style/EditTextLayout"
           android:id="@+id/etUsernameLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true">
+          android:layout_centerHorizontal="true"
+          app:errorTextAppearance="@style/TextLabel"
+          app:hintTextAppearance="@style/TextLabel">
 
           <android.support.design.widget.TextInputEditText
             android:id="@+id/etUsername"
@@ -29,26 +33,33 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:hint="@string/username"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            app:validateEmpty="@{true}"
+            app:validateType='@{"username"}'
+            app:validateTypeAutoDismiss="@{true}"/>
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+          style="@style/EditTextLayout"
           android:id="@+id/etPasswordLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_below="@id/etUsernameLayout"
-          android:layout_centerHorizontal="true">
+          android:layout_centerHorizontal="true"
+          app:errorTextAppearance="@style/TextLabel"
+          app:hintTextAppearance="@style/TextLabel">
 
           <android.support.design.widget.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etEmail"
             android:layout_centerHorizontal="true"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            app:validateEmpty="@{true}"
+            app:validateTypeAutoDismiss="@{true}"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -56,19 +67,20 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentEnd="true"
-          android:layout_alignParentRight="true"
-          android:layout_below="@id/etPasswordOneLayout"
-          android:layout_marginTop="12dp">
+          android:layout_below="@id/etPasswordLayout"
+          android:layout_marginTop="12dp"
+          android:layout_alignParentRight="true">
 
           <android.support.v7.widget.AppCompatButton
             android:id="@+id/btLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/btRegister"
-            android:layout_toRightOf="@+id/btRegister"
             android:text="@string/login"
             android:textColor="#FFFF"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            app:backgroundTint="@color/accent"
+            android:layout_toRightOf="@+id/btRegister"/>
 
           <android.support.v7.widget.AppCompatButton
             android:id="@+id/btRegister"
@@ -79,7 +91,10 @@
             android:layout_marginEnd="12dp"
             android:text="@string/register"
             android:textColor="@color/accent"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            app:backgroundTint="#FFFF"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="12dp"/>
 
         </RelativeLayout>
 

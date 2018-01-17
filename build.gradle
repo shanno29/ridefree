@@ -2,26 +2,29 @@
 ext {
     appName = "com.wiscosoft.ridefree"
 
-    minSdk = 16
-    maxSdk = 27
-    buildTools = "27.0.3"
-    gradle = "3.1.0-alpha07"
+    minSdk = 21
+    maxSdk = 26
+    buildTools = "26.0.2"
+    gradle = "3.0.1"
+    support = "26.1.0"
 
-    support = "27.0.2"
-    room = "1.0.0"
-    gsm = "11.8.0"
     kotlin = "1.2.10"
-    kodein = "4.1.0"
+    dagger = "2.13"
+    rxJava = "2.1.7"
+    rxKotlin = "2.2.0"
+    rxAndroid = "2.0.1"
     retrofit = "2.3.0"
+    okhttp = "3.9.0"
     redux = "1.2.1"
     reduxExtra = "1.2.3"
-    rxjava = "2.1.7"
-    rxkotlin = "2.2.0"
-    okhttp = "3.8.0"
+    room = "1.0.0"
+    gsm = "11.8.0"
+    epoxy = "2.8.0"
 
     junit = "4.12"
     jacoco = "0.10.0"
     mockito = "2.8.47"
+    robolectric = "3.4.2"
 }
 
 buildscript {
@@ -34,7 +37,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:3.1.0-alpha07"
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.10"
         classpath "com.vanniktech:gradle-android-junit-jacoco-plugin:0.11.0"
     }
@@ -51,14 +54,12 @@ allprojects {
     }
 }
 
-task clean(type: Delete) { delete rootProject.buildDir }
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
 
-//tasks.whenTaskAdded {
-//    task -> if (task.name == "lint") {
-//        task.enabled = false
-//    }
-//}
-
-//mavenCentral()
-//maven { url "https://jitpack.io" }
-//maven { url "https://plugins.gradle.org/m2/" }
+tasks.whenTaskAdded { task ->
+    if (task.name == "lint") {
+        task.enabled = false
+    }
+}

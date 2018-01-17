@@ -1,53 +1,42 @@
 package com.wiscosoft.ridefree.provider.redux
 
 import redux.api.Reducer
-import redux.combineReducers
 
 object Reducers {
 
-  val root: Reducer<State> by lazy {
-    combineReducers(
-      authReducer,
-      userReducer,
-      positionReducer
-    )
-  }
-
-  private val authReducer: Reducer<State> = Reducer { state, action ->
+  val root: Reducer<State> = Reducer { state, action ->
     when (action) {
-      is Action.AuthUpdate ->
-        state.copy(
+
+      is Action.AuthUpdate -> state.copy(
           auth = state.auth.copy(
-            flag = action.flag
-          )
+          flag = action.flag
         )
-      else -> state
-    }
-  }
+      )
 
-  private val userReducer: Reducer<State> = Reducer { state, action ->
-    when (action) {
-      is Action.UserUpdate.Register ->
-        state.copy(
+      is Action.LocUpdate -> state.copy(
+        loc = state.loc.copy(
+          lat = action.lat,
+          lon = action.lon
+        )
+      )
+
+      is Action.UserUpdate -> when(action) {
+        is Action.UserUpdate.Register ->
+          state.copy(
           user = state.user.copy(
             email = action.email,
-            userName = action.userName,
-            passWord = action.passWord
+            userName = action.username,
+            passWord = action.password
           )
         )
-      else -> state
-    }
-  }
+        is Action.UserUpdate.Login -> state.copy(
+          user = state.user.copy(
+            userName = action.username,
+            passWord = action.password
+          )
+        )
+      }
 
-  private val positionReducer: Reducer<State> = Reducer { state, action ->
-    when (action) {
-      is Action.LocUpdate ->
-        state.copy(
-          pos = state.pos.copy(
-            lat = action.lat,
-            lon = action.lon
-          )
-        )
       else -> state
     }
   }
