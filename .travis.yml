@@ -5,7 +5,7 @@ sudo: false
 
 env:
     matrix:
-        - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
+        - ANDROID_TARGET=android-24 ANDROID_ABI=armeabi-v7a
     global:
         - ADB_INSTALL_TIMEOUT=10
 
@@ -30,7 +30,7 @@ android:
         - extra-google-m2repository
         - extra-android-m2repository
 
-        - sys-img-armeabi-v7a-android-26
+        - sys-img-armeabi-v7a-android-24
 
 licenses:
     - 'android-sdk-preview-license-52d11cd2'
