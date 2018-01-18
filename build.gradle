@@ -2,7 +2,7 @@
 ext {
     appName = "com.wiscosoft.ridefree"
 
-    minSdk = 21
+    minSdk = 19
     maxSdk = 26
     buildTools = "26.0.2"
     gradle = "3.0.1"
