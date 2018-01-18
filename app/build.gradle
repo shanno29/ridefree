@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: "com.vanniktech.android.junit.jacoco"
 
 android {
+
     compileSdkVersion rootProject.ext.maxSdk
     kapt.correctErrorTypes true
     dataBinding.enabled true
@@ -20,9 +21,11 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += "src/main/kotlin"
-        test.java.srcDirs += "src/test/kotlin"
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -81,6 +84,12 @@ android {
         }
     }
 
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
+        all { testLogging.events 'passed', 'skipped', 'failed', 'standardOut', 'standardError' }
+    }
+
     junitJacoco {
         jacocoVersion = '0.7.2.201409121644'
         includeNoLocationClasses = true
@@ -123,13 +132,8 @@ android {
         ]
     }
 
-    testOptions.unitTests {
-        includeAndroidResources = true
-        returnDefaultValues = true
-        all { testLogging.events 'passed', 'skipped', 'failed', 'standardOut', 'standardError' }
-    }
-
 }
+
 
 dependencies {
 
@@ -147,6 +151,12 @@ dependencies {
     // Google (Gps & Maps)
     implementation "com.google.android.gms:play-services-maps:$rootProject.ext.gsm"
     implementation "com.google.android.gms:play-services-location:$rootProject.ext.gsm"
+
+    // UI
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+    implementation 'com.braintreepayments:card-form:3.0.5'
+    implementation('com.mikepenz:aboutlibraries:6.0.1@aar') { transitive true }
+    implementation 'com.github.Ilhasoft:data-binding-validator:0.6.4'
 
     // ROOM (SQL Database)
     implementation "android.arch.persistence.room:runtime:$rootProject.ext.room"
@@ -169,7 +179,16 @@ dependencies {
     implementation "com.github.pardom:redux-logger-kotlin:$rootProject.ext.reduxExtra"
     implementation "com.github.pardom.redux-rxjava:redux-rxjava2:$rootProject.ext.reduxExtra"
 
-    // Dagger 2
+    // RxJava (Async & Threading)
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroid"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJava"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlin"
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    implementation 'com.patloew.rxlocation:rxlocation:1.0.3'
+    implementation 'com.github.raviteja06:RxPermissions:1.2.0'
+    implementation 'com.github.miguelbcr:RxPaparazzo:0.6.0-2.x'
+
+    // Dagger 2 (Dependancy Injection)
     implementation "com.google.dagger:dagger:$rootProject.dagger"
     implementation "com.google.dagger:dagger-android:$rootProject.dagger"
     implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
@@ -182,21 +201,6 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
-    // UI
-    implementation 'com.github.d-max:spots-dialog:0.7@aar'
-    implementation 'com.braintreepayments:card-form:3.0.5'
-    implementation('com.mikepenz:aboutlibraries:6.0.1@aar') { transitive true }
-    implementation 'com.github.Ilhasoft:data-binding-validator:0.6.4'
-
-    // RxJava (Async & Threading)
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroid"
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJava"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlin"
-    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
-    implementation 'com.patloew.rxlocation:rxlocation:1.0.3'
-    implementation 'com.github.raviteja06:RxPermissions:1.2.0'
-    implementation 'com.github.miguelbcr:RxPaparazzo:0.6.0-2.x'
-
     // Unit Tests
     testImplementation "junit:junit:$rootProject.ext.junit"
     testImplementation "org.mockito:mockito-core:$rootProject.ext.mockito"
@@ -204,7 +208,22 @@ dependencies {
     testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectric"
     testImplementation 'org.robolectric:shadows-support-v4:3.3.2'
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2') {
-        exclude group: "com.android.support", module: "support-annotations"
+    // UI Tests
+    androidTestImplementation "com.android.support.test:runner:$rootProject.ext.testrunner"
+    androidTestImplementation "com.android.support.test:rules:$rootProject.ext.testrunner"
+    androidTestImplementation "com.android.support:support-annotations:$rootProject.ext.support"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.ext.espresso"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espresso"
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$rootProject.ext.espresso", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espresso", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
+
 }

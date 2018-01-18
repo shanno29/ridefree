@@ -22,9 +22,11 @@ ext {
     epoxy = "2.8.0"
 
     junit = "4.12"
-    jacoco = "0.10.0"
     mockito = "2.8.47"
     robolectric = "3.4.2"
+
+    testrunner = '1.0.1'
+    espresso = '3.0.1'
 }
 
 buildscript {
@@ -50,7 +52,6 @@ allprojects {
         jcenter()
         maven { url = "https://jitpack.io" }
         maven { url "https://plugins.gradle.org/m2/" }
-
     }
 }
 

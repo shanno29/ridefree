@@ -9,7 +9,6 @@ import com.wiscosoft.ridefree.R
 import com.wiscosoft.ridefree.databinding.ActivityRootBinding
 import com.wiscosoft.ridefree.feature.ui.about.AboutFragment
 import com.wiscosoft.ridefree.feature.ui.account.logout.LogoutFragment
-import com.wiscosoft.ridefree.feature.ui.account.register.RegisterFragment
 import com.wiscosoft.ridefree.feature.ui.map.MapFragment
 import com.wiscosoft.ridefree.feature.ui.payments.PaymentListFragment
 import com.wiscosoft.ridefree.feature.ui.promos.PromosFragment
@@ -28,9 +27,9 @@ class RootActivity : BaseActivity<ActivityRootBinding>() {
 
   override fun onReady() {
     super.onReady()
-    setupToolbar()
-    setupNavDrawer()
-    goTo(RegisterFragment())
+    //setupToolbar()
+    //setupNavDrawer()
+    //goTo(RegisterFragment())
   }
 
   fun setupToolbar() {

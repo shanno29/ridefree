@@ -22,12 +22,13 @@ fun EpoxyRecyclerView.withModels(buildModelsCallback: EpoxyController.() -> Unit
   })
 }
 
-fun Any.debugLog(any: Any) { Log.d(this::javaClass.name, any.toString()) }
+fun Any.classTitle(): String = this::class.java.name.split(".").last()
 
-fun Any.errorLog(throwable: Throwable) { Log.e(this::javaClass.name, throwable.localizedMessage) }
+fun Any.debugLog(any: Any) { Log.d(classTitle(), any.toString()) }
 
+fun Any.errorLog(throwable: Throwable) { Log.e(classTitle(), throwable.localizedMessage) }
 
-fun Fragment.inputManager(): InputMethodManager { return context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
+fun Fragment.inputManager(): InputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
 fun Fragment.hideKeyboard() { view?.let { inputManager().hideSoftInputFromWindow(it.windowToken, InputMethodManager.SHOW_FORCED) } }
 
@@ -35,3 +36,6 @@ fun Fragment.showMessage(msg: String) { view?.let { Snackbar.make(it, msg, Snack
 
 fun Fragment.showError(err: Throwable) { showMessage(err.localizedMessage) }
 
+//fun Any?.notNull(callback: ()-> Unit){
+//  if (this != null){ callback() }
+//}

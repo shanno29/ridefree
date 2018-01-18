@@ -9,22 +9,26 @@ import com.wiscosoft.ridefree.R
 import javax.inject.Inject
 
 class DrawerToggle @Inject constructor(activity: AppCompatActivity) {
+
+  private var isReady = false
+
   private lateinit var toggle: ActionBarDrawerToggle
 
   val setViews: (DrawerLayout, Toolbar) -> Unit =  { drawer, toolbar ->
     toggle = ActionBarDrawerToggle(activity, drawer, toolbar, R.string.drawer_open, R.string.drawer_close)
+    isReady = true
   }
 
   val setDrawerIndicator: (Boolean) -> Unit = {
-    toggle.isDrawerIndicatorEnabled = it
+    if (isReady) toggle.isDrawerIndicatorEnabled = it
   }
 
   val configChanged: (Configuration) -> Unit = {
-    toggle.onConfigurationChanged(it)
+    if (isReady) toggle::onConfigurationChanged
   }
 
   val syncState: () -> Unit = {
-    toggle.syncState()
+    if (isReady) toggle.syncState()
   }
 
 }
