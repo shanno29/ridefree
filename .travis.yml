@@ -1,45 +1,38 @@
 language: android
-jdk: oraclejdk8
+sudo: required
+dist: trusty
 
 android:
   components:
     - tools
     - platform-tools
-    - tools
-    - build-tools-26.0.2
-    - android-26
-
-    - extra-google-google_play_services
-    - extra-google-m2repository
+    - build-tools-26.0.0
     - extra-android-m2repository
+    - android-26
+    - extra-google-m2repository
+    - extra-android-support
+  licenses:
+    - 'android-sdk-license-.+'
+    - '.+'
 
-    - sys-img-armeabi-v7a-android-22
-    - sys-img-armeabi-v7a-android-17
+jdk:
+  - oraclejdk8
 
-matrix:
-  include:
-    - sudo: false
-      dist: precise
-      env: DIST=precise STACK=EC2
-
-before_script:
-    - chmod +x gradlew
-    - android list targets
-    - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
-    - emulator -avd test -no-skin -no-audio -no-window &
-
-script:
-    - echo "Travis branch is $TRAVIS_BRANCH"
-    - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
-    - android-wait-for-emulator
-    - adb devices
-    - adb shell input keyevent 82 &
-    - ./gradlew connectedCheck -PdisablePreDex --stacktrace
+env:
+  global:
+    - GRADLE_OPTS="-Xmx2048m -XX:MaxPermSize=1024m"
 
 before_install:
-    - pip install --user codecov
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - sdkmanager tools
+  - sdkmanager "system-images;android-19;default;armeabi-v7a"
 
-after_success:
-    - codecov
+before_script:
+  - echo no | avdmanager create avd --force -n test -k "system-images;android-19;default;armeabi-v7a"
+  - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82
 
-after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
+script:
+  - ./gradlew jacocoTestReportDebug
