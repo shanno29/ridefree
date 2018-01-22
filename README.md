@@ -1,5 +1,5 @@
 
-# RideFree Android [![Build Status](https://travis-ci.org/shanno29/ridefree.svg?branch=dev)](https://travis-ci.org/shanno29/ridefree) [![codecov](https://codecov.io/gh/shanno29/ridefree/branch/master/graph/badge.svg)](https://codecov.io/gh/shanno29/ridefree)
+# RideFree Android [![Build Status](https://travis-ci.org/shanno29/ridefree.svg?branch=dev)](https://travis-ci.org/shanno29/ridefree) [![codecov](https://codecov.io/gh/shanno29/ridefree/branch/dev/graph/badge.svg)](https://codecov.io/gh/shanno29/ridefree)
 
 
 #####JAVA ~ app/src/main/java/com/wiscosoft/ridefree
