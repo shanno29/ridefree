@@ -42,22 +42,22 @@ class BaseActivityTest : BaseRoboTest() {
     assertEquals(0, activity.sub.size())
   }
 
-  @Test
-  fun testActivityTitleUpdate() {
-    val activity = initActivity(TestActivity::class.java)
-    assertEquals(0, activity.sub.size())
-    assertEquals("RideFree", activity.title)
-    assertEquals(0, activity.backStackSize())
-
-    activity.titleUpdates()
-    assertEquals(1, activity.sub.size())
-    assertEquals("RideFree", activity.title)
-    assertEquals(0, activity.backStackSize())
-
-    activity.goTo(TestFragment())
-    assertEquals(1, activity.sub.size())
-    assertEquals("TestTitle", activity.title)
-    assertEquals(1, activity.backStackSize())
-  }
+//  @Test
+//  fun testActivityTitleUpdate() {
+//    val activity = initActivity(TestActivity::class.java)
+//    assertEquals(0, activity.sub.size())
+//    assertEquals("RideFree", activity.title)
+//    assertEquals(0, activity.backStackSize())
+//
+//    activity.titleUpdates()
+//    assertEquals(1, activity.sub.size())
+//    assertEquals("RideFree", activity.title)
+//    assertEquals(0, activity.backStackSize())
+//
+//    activity.goTo(TestFragment())
+//    assertEquals(1, activity.sub.size())
+//    assertEquals("TestTitle", activity.title)
+//    assertEquals(1, activity.backStackSize())
+//  }
 
 }
