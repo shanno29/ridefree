@@ -38,13 +38,13 @@ abstract class BaseActivity<Binding : ViewDataBinding> : DaggerAppCompatActivity
   }
 
   fun titleUpdates() {
-    debugLog("titleUpdates")
-    sub.add(backStackUpdates()
-      .filter { it is BaseFragment<*> }
-      .cast(BaseFragment::class.java)
-      .map { it.title.text }
-      .subscribe(this::setTitle)
-    )
+//    debugLog("titleUpdates")
+//    sub.add(backStackUpdates()
+//      .filter { it is BaseFragment<*> }
+//      .cast(BaseFragment::class.java)
+//      .map { it.title.text }
+//      .subscribe(this::setTitle)
+//    )
   }
 
 }

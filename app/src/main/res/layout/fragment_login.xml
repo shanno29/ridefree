@@ -72,11 +72,11 @@
           android:layout_alignParentRight="true">
 
           <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btLogin"
+            android:id="@+id/btSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/btRegister"
-            android:text="@string/login"
+            android:text="Submit"
             android:textColor="#FFFF"
             android:textSize="16sp"
             app:backgroundTint="@color/accent"

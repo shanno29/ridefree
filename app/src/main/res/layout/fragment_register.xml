@@ -109,13 +109,13 @@
             android:layout_marginRight="12dp"/>
 
           <Button
-            android:id="@+id/btRegister"
+            android:id="@+id/btSubmit"
             style="Widget.AppCompat.Button.BorderLess.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:text="@string/register"
+            android:text="Submit"
             android:textColor="#FFFF"
             android:textSize="16sp"
             app:backgroundTint="@color/accent"

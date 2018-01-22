@@ -17,6 +17,7 @@ import com.wiscosoft.ridefree.feature.view.DrawerToggle
 import com.wiscosoft.ridefree.core.base.BaseActivity
 import com.wiscosoft.ridefree.core.base.Layout
 import com.wiscosoft.ridefree.core.base.goTo
+import com.wiscosoft.ridefree.feature.ui.account.login.LoginFragment
 import com.wiscosoft.ridefree.feature.ui.rides.RideListFragment
 import javax.inject.Inject
 
@@ -27,9 +28,9 @@ class RootActivity : BaseActivity<ActivityRootBinding>() {
 
   override fun onReady() {
     super.onReady()
-    //setupToolbar()
-    //setupNavDrawer()
-    //goTo(RegisterFragment())
+    setupToolbar()
+    setupNavDrawer()
+    goTo(LoginFragment())
   }
 
   fun setupToolbar() {

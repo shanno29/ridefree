@@ -13,7 +13,7 @@ import com.wiscosoft.ridefree.core.base.Title
 import com.wiscosoft.ridefree.core.base.goTo
 import javax.inject.Inject
 
-@Title("Login")
+@Title("Register")
 @Layout(fragment_register)
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
@@ -23,19 +23,19 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
   override fun onReady() {
     super.onReady()
     validator.enableFormValidationMode()
-    registerButton()
-    loginButton()
+    setupSubmitButton()
+    setupLoginButton()
   }
 
-  fun registerButton() {
-    sub.add(clicks(binding.btRegister)
+  fun setupSubmitButton() {
+    sub.add(clicks(binding.btSubmit)
       .doOnNext { hideKeyboard() }
       .filter { validator.validate() }
       .subscribe { attempt() }
     )
   }
 
-  fun loginButton() {
+  fun setupLoginButton() {
     sub.add(clicks(binding.btLogin)
       .subscribe { goTo(LoginFragment()) }
     )

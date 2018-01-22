@@ -24,7 +24,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     super.onReady()
     validator.enableFormValidationMode()
     setupRegisterButton()
-    setupLoginButton()
+    setupSubmitButton()
   }
 
   private fun setupRegisterButton() {
@@ -33,8 +33,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     )
   }
 
-  private fun setupLoginButton() {
-    sub.add(clicks(binding.btLogin)
+  private fun setupSubmitButton() {
+    sub.add(clicks(binding.btSubmit)
       .doOnNext { hideKeyboard() }
       .filter { validator.validate() }
       .subscribe { attempt() }
